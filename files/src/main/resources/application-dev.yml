@@ -1,0 +1,37 @@
+server:
+  port: 23334
+spring:
+  application:
+    name: files
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  data:
+    mongodb:
+      # readWrite权限
+      username: beichen
+      password: beichen
+      host: 127.0.0.1
+      port: 27017
+      database: file
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        hostname: 127.0.0.1
+        enabled: true
+        register: true
+        instance-id: ${spring.application.name}:${server.port}
+        service-name: ${spring.application.name}
+#health
+management:
+  endpoint:
+    health:
+      show-details: always
+
+
+#file-local
+file:
+  path: /Users/hanpengyu/Documents

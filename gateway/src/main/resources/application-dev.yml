@@ -1,0 +1,45 @@
+server:
+  port: 23335
+spring:
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+  application:
+    name: gateway
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        hostname: 127.0.0.1
+        enabled: true
+        register: true
+        instance-id: ${spring.application.name}:${server.port}
+        service-name: ${spring.application.name}
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: FILE
+        uri: lb://files
+        predicates:
+          - Path=/files/**
+        filters:
+          - StripPrefix=1
+      - id: ARTICLES
+        uri: lb://articles
+        predicates:
+          - Path=/articles/**
+        filters:
+          - StripPrefix=1
+#health
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
