@@ -6,6 +6,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>support</module>
+        <module>files</module>
+        <module>articles</module>
+        <module>gateway</module>
     </modules>
 
     <parent>
