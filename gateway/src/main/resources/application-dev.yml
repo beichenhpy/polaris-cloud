@@ -8,15 +8,6 @@ spring:
   application:
     name: gateway
   cloud:
-    consul:
-      host: 127.0.0.1
-      port: 8500
-      discovery:
-        hostname: 127.0.0.1
-        enabled: true
-        register: true
-        instance-id: ${spring.application.name}:${server.port}
-        service-name: ${spring.application.name}
     gateway:
       discovery:
         locator:
@@ -34,12 +25,3 @@ spring:
           - Path=/articles/**
         filters:
           - StripPrefix=1
-#health
-management:
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include: "*"

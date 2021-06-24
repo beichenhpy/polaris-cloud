@@ -31,7 +31,7 @@ public class IoFileController extends FileBasicController{
     @GetMapping("/view/{path}")
     public void view(HttpServletResponse response, @PathVariable(name = "path") String path) {
         if (!(path == null || path.length() == 0)) {
-            File file = new File(this.uploadPath + File.separatorChar + path);
+            File file = new File(this.uploadPath + File.separator + path);
             if (!file.exists()) {
                 response.setStatus(404);
                 throw new FileNotUploadException();

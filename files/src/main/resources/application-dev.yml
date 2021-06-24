@@ -15,21 +15,6 @@ spring:
       host: 127.0.0.1
       port: 27017
       database: file
-  cloud:
-    consul:
-      host: 127.0.0.1
-      port: 8500
-      discovery:
-        hostname: 127.0.0.1
-        enabled: true
-        register: true
-        instance-id: ${spring.application.name}:${server.port}
-        service-name: ${spring.application.name}
-#health
-management:
-  endpoint:
-    health:
-      show-details: always
 
 
 #file-local
