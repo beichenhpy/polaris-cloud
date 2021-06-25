@@ -19,6 +19,18 @@ spring:
     username: root
     password: beichenhpy
     url: jdbc:mysql://localhost:3306/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
+    hikari:
+      # 连接池最大连接数
+      maximum-pool-size: 12
+      # 空闲时保持最小连接数
+      minimum-idle: 5
+      # 空闲连接存活时间
+      idle-timeout: 300000
+      # 连接超时时间
+      connection-timeout: 20000
+      # 测试sql
+      connection-test-query: select 1
+      pool-name: beichen
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
@@ -28,3 +40,22 @@ mybatis-plus:
     db-config:
       id-type: assign_id
 
+
+#feign-config
+feign:
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: true
+    connection-timeout: 5000
+    max-connections: 1000
+    max-connections-per-route: 100
+  # 压缩配置
+  compression:
+    request:
+      enabled: true
+      # 配置压缩支持的MIME TYPE
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048  # 配置压缩数据大小的下限
+    response:
+      enabled: true # 配置响应GZIP压缩

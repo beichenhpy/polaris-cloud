@@ -22,7 +22,6 @@ public class ArticleController {
 
     private final ArticleService articleService;
 
-
     @PostMapping("/article")
     public ResponseEntity<String> addArticle(@RequestBody Article article){
         boolean saved = articleService.save(article);

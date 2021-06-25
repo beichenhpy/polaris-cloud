@@ -3,6 +3,7 @@ package cn.beichenhpy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author beichenhpy
@@ -10,6 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @apiNote ArticleApplication description：
  * @since 2021/6/25 17:26
  */
+@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 public class ArticleApplication {

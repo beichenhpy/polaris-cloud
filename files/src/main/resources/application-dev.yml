@@ -22,8 +22,6 @@ spring:
         enabled: true
         #beichen-dev
         namespace: fcb46db4-0c13-4f69-85d4-d23bacdffd7a
-
-
 #file-local
 file:
   path: /Users/hanpengyu/Documents
