@@ -11,7 +11,7 @@
 
     <artifactId>support</artifactId>
     <packaging>pom</packaging>
-    <version>${beichen.version}</version>
+    <version>1.0.0</version>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -20,5 +20,6 @@
     <modules>
         <module>beichen-cloud-support-common</module>
         <module>beichen-cloud-support-redis</module>
+        <module>beichen-cloud-support-mybatis</module>
     </modules>
 </project>

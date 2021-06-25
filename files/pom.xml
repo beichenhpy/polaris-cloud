@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>files</artifactId>
-    <version>${beichen.version}</version>
+    <version>1.0.0</version>
     <name>files</name>
     <description>文件服务</description>
     <dependencies>
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>cn.beichenhpy</groupId>
             <artifactId>beichen-cloud-support-common</artifactId>
-            <version>${beichen.version}</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

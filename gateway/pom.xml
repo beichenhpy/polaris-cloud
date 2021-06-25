@@ -10,7 +10,7 @@
         <version>1.0.0</version>
     </parent>
     <artifactId>gateway</artifactId>
-    <version>${beichen.version}</version>
+    <version>1.0.0</version>
     <name>gateway</name>
     <dependencies>
         <dependency>
