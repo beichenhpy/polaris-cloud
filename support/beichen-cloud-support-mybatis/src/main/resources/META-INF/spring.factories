@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.beichenhpy.config.MybatisPlusConfig,\
+  cn.beichenhpy.handler.FiledInjectHandler
