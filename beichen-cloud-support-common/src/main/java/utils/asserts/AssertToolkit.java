@@ -1,4 +1,4 @@
-package utils;
+package utils.asserts;
 
 
 import cn.hutool.core.lang.Assert;
