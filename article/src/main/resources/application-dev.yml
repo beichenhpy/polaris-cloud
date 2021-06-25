@@ -43,13 +43,8 @@ mybatis-plus:
 
 #feign-config
 feign:
-  okhttp:
+  hystrix:
     enabled: true
-  httpclient:
-    enabled: true
-    connection-timeout: 5000
-    max-connections: 1000
-    max-connections-per-route: 100
   # 压缩配置
   compression:
     request:
@@ -59,3 +54,9 @@ feign:
       min-request-size: 2048  # 配置压缩数据大小的下限
     response:
       enabled: true # 配置响应GZIP压缩
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full

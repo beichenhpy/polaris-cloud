@@ -2,9 +2,11 @@ package cn.beichenhpy.controller;
 
 import cn.beichenhpy.modal.Article;
 import cn.beichenhpy.service.ArticleService;
+import cn.beichenhpy.service.feigns.FileFeignService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,19 +21,24 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1")
 public class ArticleController {
-
     private final ArticleService articleService;
+    private final FileFeignService fileFeignService;
 
     @PostMapping("/article")
-    public ResponseEntity<String> addArticle(@RequestBody Article article){
+    public ResponseEntity<String> addArticle(@RequestBody Article article) {
         boolean saved = articleService.save(article);
         return saved ? ResponseEntity.ok().body("ok") : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/articles")
     public ResponseEntity<IPage<Article>> showArticles(@RequestParam(value = "page") int page,
-                                                      @RequestParam("size") int size){
+                                                       @RequestParam("size") int size) {
         IPage<Article> articles = articleService.page(new Page<>(page, size));
         return ResponseEntity.ok(articles);
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> test(String name) {
+        return fileFeignService.test(name);
     }
 }

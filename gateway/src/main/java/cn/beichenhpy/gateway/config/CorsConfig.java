@@ -2,10 +2,20 @@ package cn.beichenhpy.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsUtils;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebFilter;
+import org.springframework.web.server.WebFilterChain;
 import org.springframework.web.util.pattern.PathPatternParser;
+import reactor.core.publisher.Mono;
 
 /**
  * @author beichenhpy
@@ -22,16 +32,24 @@ public class CorsConfig {
     private static final Long MAX_AGE = 18000L;
 
     @Bean
-    public CorsWebFilter corsWebFilter(){
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedHeader(ALLOWED_HEADERS);
-        corsConfiguration.addAllowedMethod(ALLOWED_METHODS);
-        corsConfiguration.addAllowedOrigin(ALLOWED_ORIGIN);
-        corsConfiguration.addExposedHeader(ALLOWED_EXPOSE);
-        corsConfiguration.setMaxAge(MAX_AGE);
-        UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource(new PathPatternParser());
-        configurationSource.registerCorsConfiguration("/**",corsConfiguration);
-        return new CorsWebFilter(configurationSource);
+    public WebFilter corsFilter() {
+        return (ServerWebExchange ctx, WebFilterChain chain) -> {
+            ServerHttpRequest request = ctx.getRequest();
+            if (CorsUtils.isCorsRequest(request)) {
+                ServerHttpResponse response = ctx.getResponse();
+                HttpHeaders headers = response.getHeaders();
+                headers.add("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
+                headers.add("Access-Control-Allow-Methods", ALLOWED_METHODS);
+                headers.add("Access-Control-Allow-Headers", ALLOWED_HEADERS);
+                headers.add("Access-Control-Expose-Headers", ALLOWED_EXPOSE);
+                headers.add("Access-Control-Allow-Credentials", "true");
+                if (request.getMethod() == HttpMethod.OPTIONS) {
+                    response.setStatusCode(HttpStatus.OK);
+                    return Mono.empty();
+                }
+            }
+            return chain.filter(ctx);
+        };
     }
 
 }
