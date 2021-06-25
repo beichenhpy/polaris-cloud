@@ -1,8 +1,9 @@
-package cn.beichenhpy.utils;
+package utils;
 
-import cn.beichenhpy.Exception.FileNotUploadException;
-import cn.beichenhpy.Exception.FileUploadFailException;
-import org.springframework.util.Assert;
+
+import cn.hutool.core.lang.Assert;
+import exception.file.FileNotUploadException;
+import exception.file.FileUploadFailException;
 
 /**
  * @author beichenhpy

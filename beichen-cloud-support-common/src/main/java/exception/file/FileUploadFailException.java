@@ -1,4 +1,4 @@
-package cn.beichenhpy.Exception;
+package exception.file;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

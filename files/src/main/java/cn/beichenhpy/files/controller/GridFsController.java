@@ -1,9 +1,9 @@
 package cn.beichenhpy.files.controller;
 
-import cn.beichenhpy.Exception.FileNotUploadException;
-import cn.beichenhpy.Exception.FileUploadFailException;
 import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.model.GridFSFile;
+import exception.file.FileNotUploadException;
+import exception.file.FileUploadFailException;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
