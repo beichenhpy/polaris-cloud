@@ -22,7 +22,7 @@
 
 
 ## support-redis
-- 提供Redis-util(后续考虑解耦)
+- 提供Redis-util-只提供Util,每个服务可能对应的db都是设置不同的，所以具体配置放到对应的服务中设置
 
 ## support-common
 - 提供utils
