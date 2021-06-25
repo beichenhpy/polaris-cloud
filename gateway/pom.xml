@@ -7,10 +7,10 @@
     <parent>
         <artifactId>beichen-cloud</artifactId>
         <groupId>cn.beichenhpy</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <artifactId>gateway</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${beichen.version}</version>
     <name>gateway</name>
     <dependencies>
         <dependency>
