@@ -25,3 +25,9 @@ spring:
           - Path=/files/**
         filters:
           - StripPrefix=1
+      - id: ARTICLE
+        uri: lb://article
+        predicates:
+          - Path=/article/**
+        filters:
+          - StripPrefix=1
