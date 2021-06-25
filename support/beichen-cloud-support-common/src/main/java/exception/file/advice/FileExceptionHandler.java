@@ -1,8 +1,9 @@
-package cn.beichenhpy.files.controller.advice;
+package exception.file.advice;
 
 import exception.file.FileNotUploadException;
 import exception.file.FileUploadFailException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.impl.SizeException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,6 +43,15 @@ public class FileExceptionHandler {
     @ResponseBody
     public ResponseEntity<String> fileUploadFailExceptionHandler(FileUploadFailException e) {
         log.error(e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(e.getMessage());
+    }
+
+    @ExceptionHandler(SizeException.class)
+    @ResponseBody
+    public ResponseEntity<String> fileServiceFailResponseExceptionHandler(SizeException e) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)

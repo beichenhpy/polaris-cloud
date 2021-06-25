@@ -13,12 +13,20 @@ import exception.file.FileUploadFailException;
  */
 public class AssertToolkit extends Assert {
 
+    /**
+     * 文件未上传
+     * @param file 文件
+     */
     public static void fileNotNull(Object file){
         if (file == null){
             throw new FileNotUploadException();
         }
     }
 
+    /**
+     * 文件山川失败
+     * @param filename 文件名
+     */
     public static void filenameNotNull(String filename){
         if (filename == null){
             throw new FileUploadFailException();

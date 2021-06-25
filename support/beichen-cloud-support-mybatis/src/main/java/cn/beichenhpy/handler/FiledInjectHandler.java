@@ -2,7 +2,6 @@ package cn.beichenhpy.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +11,6 @@ import java.time.LocalDateTime;
  * @apiNote FiledInjectHandler description：字段自动填充
  * @since 2021/6/25 16:42
  */
-@Component
 public class FiledInjectHandler implements MetaObjectHandler {
 
     @Override
