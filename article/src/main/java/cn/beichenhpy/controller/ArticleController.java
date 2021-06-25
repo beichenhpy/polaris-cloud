@@ -2,11 +2,10 @@ package cn.beichenhpy.controller;
 
 import cn.beichenhpy.modal.Article;
 import cn.beichenhpy.service.ArticleService;
-import cn.beichenhpy.service.feigns.FileFeignService;
+import cn.beichenhpy.service.feign.FileFeignService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

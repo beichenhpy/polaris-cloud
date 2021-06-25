@@ -1,4 +1,4 @@
-package cn.beichenhpy.service.feigns;
+package cn.beichenhpy.service.feign;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,6 +1,6 @@
-package cn.beichenhpy.service.feigns.fallback;
+package cn.beichenhpy.service.feign.fallback;
 
-import cn.beichenhpy.service.feigns.FileFeignService;
+import cn.beichenhpy.service.feign.FileFeignService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
