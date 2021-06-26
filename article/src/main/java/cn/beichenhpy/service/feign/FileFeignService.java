@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @apiNote FileFeignService description：
  * @since 2021/6/25 20:47
  */
-@FeignClient(value = "files", contextId = "file-test",fallback = FileFeignServiceFallbackImpl.class)
+@FeignClient(name = "files", contextId = "file-test",fallback = FileFeignServiceFallbackImpl.class)
 public interface FileFeignService {
     /**
      * 测试Feign
