@@ -13,6 +13,7 @@
     <version>1.0.0</version>
     <name>gateway</name>
     <dependencies>
+        <!--2020.0后需要添加这个依赖使bootstrap.yml生效-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
@@ -21,6 +22,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
+        <!--2020.0.后，需要添加loadbalancer-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
