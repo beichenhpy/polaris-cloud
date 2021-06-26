@@ -1,5 +1,14 @@
 # beichen-cloud
+版本  
+SpringCloud 2020.0.3  
+SpringCloudAlibaba 2021.1  
 
+spring-cloud-gateway api网关  
+spring-cloud-openfeign (无ribbon和hystrix)  
+spring-cloud-loadbalancer (替代ribbon负载均衡)  
+spring-cloud-alibaba-sentinel (替代Hystrix熔断)  
+spring-cloud-alibaba-seata 分布式事务  
+spring-cloud-alibaba-nacos 1.4.2 服务发现及配置中心
 
 ## nacos  + gateway 
 - nacos作为服务发现及配置中心
@@ -15,7 +24,7 @@
 - authFilter
 
 
-##file文件服务
+## file文件服务
 两种方式
 - 本地存储
 - mongodb-GridFs
@@ -27,3 +36,19 @@
 ## support-common
 - 提供utils
 - 提供exception
+
+## support-mybatis
+- 提供Mybatis-plus的一些配置
+
+完成进度：  
+- [x] gateway 
+- [x] nacos服务发现
+- [ ] nacos配置中心
+- [x] seata
+- [ ] sentinel
+  - [x] 与openfeign连用
+  - [ ] 超时熔断设置不生效解决
+- [ ] openfeign
+  - [x] client超时设置
+  - [x] fallback设置
+  - [ ] sentinel结合 
