@@ -1,6 +1,6 @@
-package cn.beichenhpy.service.feign;
+package cn.beichenhpy.service.feign.demo;
 
-import cn.beichenhpy.service.feign.fallback.FileFeignServiceFallbackImpl;
+import cn.beichenhpy.service.feign.demo.fallback.FileFeignServiceFallbackImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

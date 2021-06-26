@@ -10,7 +10,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: localhost:8848
         enabled: true
         #beichen-dev
         namespace: fcb46db4-0c13-4f69-85d4-d23bacdffd7a

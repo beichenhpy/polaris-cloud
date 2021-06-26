@@ -2,8 +2,7 @@ package cn.beichenhpy.controller;
 
 import cn.beichenhpy.modal.Article;
 import cn.beichenhpy.service.ArticleService;
-import cn.beichenhpy.service.feign.FileFeignService;
-import cn.beichenhpy.service.feign.fallback.FileFeignServiceFallbackImpl;
+import cn.beichenhpy.service.feign.demo.FileFeignService;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class ArticleController {
     private final ArticleService articleService;
-    private final FileFeignService fileFeignService;
 
     @PostMapping("/article")
     public ResponseEntity<String> addArticle(@RequestBody Article article) {
@@ -36,13 +34,5 @@ public class ArticleController {
                                                        @RequestParam("size") int size) {
         IPage<Article> articles = articleService.page(new Page<>(page, size));
         return ResponseEntity.ok(articles);
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity<String> test(String name) {
-        if ("error".endsWith(name)){
-            throw new RuntimeException();
-        }
-        return fileFeignService.test(name);
     }
 }

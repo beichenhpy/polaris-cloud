@@ -1,4 +1,4 @@
-package cn.beichenhpy.files.controller;
+package cn.beichenhpy.files.controller.demo;
 
 import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ public class FeignTestController {
     @GetMapping("/test")
     @SneakyThrows
     public ResponseEntity<String> test(@RequestParam(value = "name")String name){
-        Thread.sleep(6000);
+//        Thread.sleep(6000);
         return ResponseEntity.ok(name);
     }
 }

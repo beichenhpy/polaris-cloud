@@ -1,6 +1,6 @@
-package cn.beichenhpy.service.feign.fallback;
+package cn.beichenhpy.service.feign.demo.fallback;
 
-import cn.beichenhpy.service.feign.FileFeignService;
+import cn.beichenhpy.service.feign.demo.FileFeignService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Component;
 public class FileFeignServiceFallbackImpl implements FileFeignService {
     @Override
     public ResponseEntity<String> test(String name) {
-        return ResponseEntity.badRequest().body("fail");
+        return ResponseEntity.badRequest().body("feign-降级");
     }
 }

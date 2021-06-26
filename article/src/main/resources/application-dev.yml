@@ -9,9 +9,11 @@ spring:
       max-request-size: 10MB
   cloud:
     sentinel:
+      eager: true
       transport:
         port: 8719
-        dashboard: localhost:16000
+        dashboard: localhost:8080
+        client-ip: localhost
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
@@ -53,9 +55,9 @@ feign:
   client:
     config:
       default:
+        loggerLevel: full
         connectTimeout: 5000
         readTimeout: 5000
-        loggerLevel: full
   sentinel:
     enabled: true
   # 压缩配置
@@ -70,4 +72,4 @@ feign:
 logging:
   level:
     # log 1.配置好Configuration 2.yml中配置package: debug
-    cn.beichenhpy.service.feign: debug
+    cn.beichenhpy.service.demo.feign: debug
