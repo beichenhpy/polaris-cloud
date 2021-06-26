@@ -8,6 +8,10 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
   cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:16000
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
@@ -43,7 +47,7 @@ mybatis-plus:
 
 #feign-config
 feign:
-  hystrix:
+  sentinel:
     enabled: true
   # 压缩配置
   compression:
@@ -58,19 +62,9 @@ logging:
   level:
     # log 1.配置好Configuration 2.yml中配置package: debug
     cn.beichenhpy.service.feign: debug
-# 全局参数设置-ribbon+hystrix 计算后来判断是否使用hystrix熔断
-hystrix:
-  command:
-    #配置服务降级全局超时时间
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 10000
-        timeout:
-          enabled: true #开启hystrix,为false将超时控制交给ribbon
+## 全局参数设置-ribbon+hystrix 计算后来判断是否使用hystrix熔断
 
-# 也是控制超时时间，但是不会进入fallback 会报错，交给hystrix才能熔断降级 hystrix的时间由ribbon计算，(1 + MaxAutoRetries + MaxAutoRetriesNextServer) * ReadTimeout
+### 控制超时时间 feign -> sentinel -> ribbon(retry) sentinel动态设置不生效，现在的sentinel就和hystrix没差
 ribbon:
   MaxAutoRetries: 0 #最大重试次数，当Eureka中可以找到服务，但是服务连不上时将会重试，如果eureka中找不到服务则直接走断路器
   MaxAutoRetriesNextServer: 1 #切换实例的重试次数

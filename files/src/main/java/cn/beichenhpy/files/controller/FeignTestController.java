@@ -17,7 +17,7 @@ public class FeignTestController {
     @GetMapping("/test")
     @SneakyThrows
     public ResponseEntity<String> test(@RequestParam(value = "name")String name){
-        Thread.sleep(15000);
+        Thread.sleep(6000);
         return ResponseEntity.ok(name);
     }
 }
