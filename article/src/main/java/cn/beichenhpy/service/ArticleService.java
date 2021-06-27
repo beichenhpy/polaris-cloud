@@ -10,4 +10,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021/6/25 17:56
  */
 public interface ArticleService extends IService<Article> {
+    Boolean addArticle(Article article);
 }

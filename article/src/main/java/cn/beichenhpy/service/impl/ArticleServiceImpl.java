@@ -5,6 +5,7 @@ import cn.beichenhpy.modal.Article;
 import cn.beichenhpy.service.ArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import cn.beichenhpy.utils.asserts.AssertToolkit;
 
 /**
  * @author beichenhpy
@@ -14,4 +15,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper,Article> implements ArticleService{
+    @Override
+    public Boolean addArticle(Article article) {
+        AssertToolkit.parameterNotNull(article,"article is null");
+        return this.save(article);
+    }
 }

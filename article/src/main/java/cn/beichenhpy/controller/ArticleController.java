@@ -2,8 +2,6 @@ package cn.beichenhpy.controller;
 
 import cn.beichenhpy.modal.Article;
 import cn.beichenhpy.service.ArticleService;
-import cn.beichenhpy.service.feign.demo.FileFeignService;
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AllArgsConstructor;
@@ -24,8 +22,8 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @PostMapping("/article")
-    public ResponseEntity<String> addArticle(@RequestBody Article article) {
-        boolean saved = articleService.save(article);
+    public ResponseEntity<String> addArticle(Article article) {
+        boolean saved = articleService.addArticle(article);
         return saved ? ResponseEntity.ok().body("ok") : ResponseEntity.badRequest().build();
     }
 
