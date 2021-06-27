@@ -1,4 +1,4 @@
-package utils.math;
+package cn.beichenhpy.utils.math;
 
 /**
  * @author beichenhpy

@@ -1,4 +1,4 @@
-package exception.file;
+package cn.beichenhpy.exception.file;
 
 import lombok.*;
 
@@ -13,7 +13,7 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class FileNotUploadException extends RuntimeException{
+public class FileNotUploadException extends FileRuntimeException {
     private String message;
     public FileNotUploadException(){
         this.message  = "file is not on the disk";

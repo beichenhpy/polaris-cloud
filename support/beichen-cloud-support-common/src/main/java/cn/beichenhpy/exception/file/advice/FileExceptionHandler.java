@@ -1,7 +1,7 @@
-package exception.file.advice;
+package cn.beichenhpy.exception.file.advice;
 
-import exception.file.FileNotUploadException;
-import exception.file.FileUploadFailException;
+import cn.beichenhpy.exception.file.FileNotUploadException;
+import cn.beichenhpy.exception.file.FileUploadFailException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.impl.SizeException;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
  * @apiNote FileExceptionHandler description：文件服务异常处理
  * todo 想出一个好的异常处理方案
  * @since 2021/5/9 8:18 下午
+ * @see FileNotUploadException
+ * @see FileUploadFailException
  */
 @Slf4j
 @ControllerAdvice

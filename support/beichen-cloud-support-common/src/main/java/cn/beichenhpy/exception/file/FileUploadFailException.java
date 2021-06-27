@@ -1,4 +1,4 @@
-package exception.file;
+package cn.beichenhpy.exception.file;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class FileUploadFailException extends RuntimeException{
+public class FileUploadFailException extends FileRuntimeException {
     private String message;
     public FileUploadFailException(){
         this.message  = "file upload fail";
