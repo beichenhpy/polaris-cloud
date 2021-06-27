@@ -1,7 +1,7 @@
 package cn.beichenhpy.files.controller;
 
-import exception.file.FileNotUploadException;
-import exception.file.FileUploadFailException;
+import cn.beichenhpy.exception.file.FileNotUploadException;
+import cn.beichenhpy.exception.file.FileUploadFailException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
