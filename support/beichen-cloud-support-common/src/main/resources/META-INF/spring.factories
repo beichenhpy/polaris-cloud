@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.beichenhpy.exception.common.advice.CommonExceptionHandler,\
+  cn.beichenhpy.exception.file.advice.FileExceptionHandler,\
+  cn.beichenhpy.aspect.ExceptionAspect
