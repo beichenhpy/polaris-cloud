@@ -1,10 +1,13 @@
 package cn.beichenhpy.utils.asserts;
 
 
+import cn.beichenhpy.exception.common.FeignResponseFailException;
 import cn.hutool.core.lang.Assert;
 import cn.beichenhpy.exception.common.ParameterException;
 import cn.beichenhpy.exception.file.FileNotUploadException;
 import cn.beichenhpy.exception.file.FileUploadFailException;
+import org.springframework.http.HttpStatus;
+import org.springframework.lang.Nullable;
 
 /**
  * @author beichenhpy
@@ -38,12 +41,24 @@ public class AssertToolkit extends Assert {
 
     /**
      * 参数不为空
+     *
      * @param parameter 参数
-     * @param message 异常信息
+     * @param message   异常信息
      */
     public static void parameterNotNull(Object parameter, String message) {
         if (parameter == null) {
             throw new ParameterException(message);
+        }
+    }
+
+    /**
+     * feign请求失败 调用fallback
+     * @param status httpStatus
+     * @param message 错误信息
+     */
+    public static void feignResponseFailException(HttpStatus status, @Nullable String message) {
+        if (status.equals(HttpStatus.BAD_REQUEST)) {
+            throw new FeignResponseFailException(status, message);
         }
     }
 }

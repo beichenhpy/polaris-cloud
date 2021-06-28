@@ -1,5 +1,6 @@
 package cn.beichenhpy.exception.common.advice;
 
+import cn.beichenhpy.exception.common.FeignResponseFailException;
 import cn.beichenhpy.exception.common.ParameterException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,6 +15,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class CommonExceptionHandler {
     @ExceptionHandler(ParameterException.class)
     public ResponseEntity<String> parameterExceptionHandler(ParameterException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(FeignResponseFailException.class)
+    public ResponseEntity<String> FeignResponseFailExceptionHandler(FeignResponseFailException e){
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
