@@ -7,15 +7,15 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author beichenhpy
- * @version 0.0.1
- * @apiNote ArticleApplication description：
- * @since 2021/6/25 17:26
+ * @version 1.0.0
+ * @apiNote
+ * @since 2021/6/28 11:37
  */
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
-public class ArticleApplication {
+public class ProviderApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ArticleApplication.class, args);
+        SpringApplication.run(ProviderApplication.class, args);
     }
 }

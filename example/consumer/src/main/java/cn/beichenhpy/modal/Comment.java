@@ -14,17 +14,19 @@ import java.time.LocalDateTime;
  * @apiNote Article description：文章实体类
  * @since 2021/6/25 17:50
  */
-@TableName("article")
+@TableName("comment")
 @Data
-public class Article {
+public class Comment {
     @TableId
     private String id;
 
     private String content;
 
-    private String title;
+    private String postUserName;
 
     private String image;
+
+    private String articleId;
 
     @TableField(value = "create_time",fill = FieldFill.INSERT)
     private LocalDateTime createTime;

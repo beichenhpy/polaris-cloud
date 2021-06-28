@@ -1,0 +1,81 @@
+server:
+  port: 23338
+spring:
+  application:
+    name: provider
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  cloud:
+    sentinel:
+      eager: true
+      transport:
+        port: 8719
+        dashboard: localhost:8080
+        client-ip: localhost
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        enabled: true
+        #beichen-dev
+        namespace: fcb46db4-0c13-4f69-85d4-d23bacdffd7a
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: beichenhpy
+    url: jdbc:mysql://localhost:3306/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
+    hikari:
+      # 连接池最大连接数
+      maximum-pool-size: 12
+      # 空闲时保持最小连接数
+      minimum-idle: 5
+      # 空闲连接存活时间
+      idle-timeout: 300000
+      # 连接超时时间
+      connection-timeout: 20000
+      # 测试sql
+      connection-test-query: select 1
+      pool-name: beichen
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: assign_id
+
+
+#feign-config-使用Sentinel后代替了hystrix
+# 新版springcloud 2020.0中去掉了ribbon和hystrix springcloudalibaba 2021中也去掉了ribbon 全面使用loadbalancer代替ribbon
+# 在sentinel的簇点链路中对feign的进行超时降级不生效，不懂为什么
+# 可以用client:config:default(具体的feignName不生效，只有default生效):connectTimeout/readTimeout/loggerLevel
+feign:
+# 使用官方推荐的断路器配置引入对应的断路器implement 如hystrix/sentinel等
+# openfeign:https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/#spring-cloud-feign-circuitbreaker
+# cricuitbreaker:https://spring.io/projects/spring-cloud-circuitbreaker#overview
+#  circuitbreaker:
+#    enabled: true
+  client:
+    config:
+      default:
+        loggerLevel: full
+        connectTimeout: 5000
+        readTimeout: 5000
+# 使用sentinel提供的配置
+  sentinel:
+    enabled: true
+  # 压缩配置
+  compression:
+    request:
+      enabled: true
+      # 配置压缩支持的MIME TYPE
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048  # 配置压缩数据大小的下限
+    response:
+      enabled: true # 配置响应GZIP压缩
+logging:
+  level:
+    # log 1.配置好Configuration 2.yml中配置package: debug
+    cn.beichenhpy.service.feign: debug
