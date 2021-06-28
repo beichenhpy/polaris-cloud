@@ -19,5 +19,6 @@ public class FeignResponseFailException extends ResponseStatusException implemen
 
     public FeignResponseFailException(HttpStatus status, String message) {
         super(status, message);
+        this.message = message;
     }
 }

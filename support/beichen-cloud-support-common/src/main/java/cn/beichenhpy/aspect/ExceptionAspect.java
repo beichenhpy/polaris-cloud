@@ -36,6 +36,7 @@ public class ExceptionAspect {
         //这里可以回滚事务
         if (e instanceof NeedRollback){
             //do rollback
+            log.info("回滚事务");
         }
     }
 
