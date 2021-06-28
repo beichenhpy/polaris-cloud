@@ -32,31 +32,15 @@ public class ConsumerController {
      * @return 返回值
      */
     @GetMapping("/info/{aid}")
-    @SentinelResource(value = "ArticleInfo",fallback = "fallback")
+    @SentinelResource(value = "ArticleInfo")
     public ResponseEntity<Article> info(@PathVariable("aid") String aid) {
-        if ("error".endsWith(aid)){
-            throw new RuntimeException("降级");
-        }
         ResponseEntity<List<Comment>> response = providerFeignService.getCommentInfoByArticleId(aid);
-        AssertToolkit.feignResponseFail(response.getStatusCode(),null);
+        AssertToolkit.feignResponseFail(response.getStatusCode(),"provider");
         Article article = consumerService.getById(aid);
         article.setComments(response.getBody());
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(article);
-    }
-
-    /**
-     * 异常埋点的fallback方法
-     * @param aid 与原方法要相同
-     * @param throwable 异常
-     * @return 返回值
-     */
-    public ResponseEntity<String> fallback(String aid,Throwable throwable) {
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .body("埋点"+throwable.getMessage());
     }
 }
