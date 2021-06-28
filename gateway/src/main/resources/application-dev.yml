@@ -25,9 +25,15 @@ spring:
           - Path=/files/**
         filters:
           - StripPrefix=1
-      - id: ARTICLE
-        uri: lb://article
+      - id: CONSUMER
+        uri: lb://consumer
         predicates:
-          - Path=/article/**
+          - Path=/consumer/**
+        filters:
+          - StripPrefix=1
+      - id: PROVIDER
+        uri: lb://provider
+        predicates:
+          - Path=/provider/**
         filters:
           - StripPrefix=1
