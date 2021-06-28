@@ -8,7 +8,7 @@
         <module>files</module>
         <module>gateway</module>
         <module>support</module>
-        <module>article</module>
+        <module>example</module>
     </modules>
 
     <parent>
