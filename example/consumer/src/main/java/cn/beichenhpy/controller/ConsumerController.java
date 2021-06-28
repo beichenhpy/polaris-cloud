@@ -7,6 +7,9 @@ import cn.beichenhpy.service.feign.ProviderFeignService;
 import cn.beichenhpy.utils.asserts.AssertToolkit;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,10 +38,13 @@ public class ConsumerController {
             throw new RuntimeException("降级");
         }
         ResponseEntity<List<Comment>> response = providerFeignService.getCommentInfoByArticleId(aid);
-        AssertToolkit.feignResponseFailException(response.getStatusCode(),null);
+        AssertToolkit.feignResponseFail(response.getStatusCode(),null);
         Article article = consumerService.getById(aid);
         article.setComments(response.getBody());
-        return ResponseEntity.ok(article);
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(article);
     }
 
     /**
@@ -48,6 +54,9 @@ public class ConsumerController {
      * @return 返回值
      */
     public ResponseEntity<String> fallback(String aid,Throwable throwable) {
-        return ResponseEntity.badRequest().body("埋点"+throwable.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body("埋点"+throwable.getMessage());
     }
 }
