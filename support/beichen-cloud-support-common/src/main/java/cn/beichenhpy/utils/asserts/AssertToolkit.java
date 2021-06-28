@@ -1,13 +1,14 @@
 package cn.beichenhpy.utils.asserts;
 
 
-import cn.beichenhpy.exception.common.FeignResponseFailException;
-import cn.hutool.core.lang.Assert;
-import cn.beichenhpy.exception.common.ParameterException;
+import cn.beichenhpy.exception.feign.FeignResponseFailException;
 import cn.beichenhpy.exception.file.FileNotUploadException;
 import cn.beichenhpy.exception.file.FileUploadFailException;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
+
+import java.util.Optional;
 
 /**
  * @author beichenhpy
@@ -40,25 +41,17 @@ public class AssertToolkit extends Assert {
     }
 
     /**
-     * 参数不为空
-     *
-     * @param parameter 参数
-     * @param message   异常信息
-     */
-    public static void parameterNotNull(Object parameter, String message) {
-        if (parameter == null) {
-            throw new ParameterException(message);
-        }
-    }
-
-    /**
      * feign请求失败 调用fallback
      * @param status httpStatus
-     * @param message 错误信息
+     * @param serviceName 错误信息
      */
-    public static void feignResponseFailException(HttpStatus status, @Nullable String message) {
-        if (status.equals(HttpStatus.BAD_REQUEST)) {
-            throw new FeignResponseFailException(status, message);
+    public static void feignResponseFail(HttpStatus status, @Nullable String serviceName) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("feign fallback,check feign service is [");
+        sb.append(Optional.ofNullable(serviceName).orElse("unknown"));
+        sb.append("]");
+        if (status.equals(HttpStatus.SERVICE_UNAVAILABLE)) {
+            throw new FeignResponseFailException(status,sb.toString());
         }
     }
 }

@@ -1,5 +1,6 @@
 package cn.beichenhpy.aspect;
 
+import cn.beichenhpy.exception.NeedRollback;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -33,6 +34,9 @@ public class ExceptionAspect {
     public void afterThrow(Throwable e){
         log.info("method call cn.beichenhpy.exception: "+e.getMessage());
         //这里可以回滚事务
+        if (e instanceof NeedRollback){
+            //do rollback
+        }
     }
 
 }

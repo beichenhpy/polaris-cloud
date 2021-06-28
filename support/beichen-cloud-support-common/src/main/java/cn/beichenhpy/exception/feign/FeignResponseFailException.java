@@ -1,8 +1,7 @@
-package cn.beichenhpy.exception.common;
+package cn.beichenhpy.exception.feign;
 
-import lombok.AllArgsConstructor;
+import cn.beichenhpy.exception.NeedRollback;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,12 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
  */
 @Getter
 @Setter
-public class FeignResponseFailException extends ResponseStatusException {
+public class FeignResponseFailException extends ResponseStatusException implements NeedRollback {
     private String message;
-
-    public FeignResponseFailException(HttpStatus status) {
-        super(status);
-    }
 
     public FeignResponseFailException(HttpStatus status, String message) {
         super(status, message);
