@@ -34,7 +34,6 @@ public class ConsumerController {
      * @return 返回值
      */
     @GetMapping("/info/{aid}")
-    @SentinelResource(value = "ArticleInfo")
     public ResponseEntity<Article> info(@PathVariable("aid") String aid) {
         ResponseEntity<List<Comment>> response = providerFeignService.getCommentInfoByArticleId(aid);
         AssertToolkit.feignResponseFail(response.getStatusCode(),"provider");
