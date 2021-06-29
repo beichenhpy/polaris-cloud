@@ -8,12 +8,6 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
   cloud:
-    sentinel:
-      eager: true
-      transport:
-        port: 8719
-        dashboard: localhost:8080
-        client-ip: localhost
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
@@ -45,37 +39,3 @@ mybatis-plus:
     banner: false
     db-config:
       id-type: assign_id
-
-
-#feign-config-使用Sentinel后代替了hystrix
-# 新版springcloud 2020.0中去掉了ribbon和hystrix springcloudalibaba 2021中也去掉了ribbon 全面使用loadbalancer代替ribbon
-# 在sentinel的簇点链路中对feign的进行超时降级不生效，不懂为什么
-# 可以用client:config:default(具体的feignName不生效，只有default生效):connectTimeout/readTimeout/loggerLevel
-feign:
-# 使用官方推荐的断路器配置引入对应的断路器implement 如hystrix/sentinel等
-# openfeign:https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/#spring-cloud-feign-circuitbreaker
-# cricuitbreaker:https://spring.io/projects/spring-cloud-circuitbreaker#overview
-#  circuitbreaker:
-#    enabled: true
-  client:
-    config:
-      default:
-        loggerLevel: full
-        connectTimeout: 5000
-        readTimeout: 5000
-# 使用sentinel提供的配置
-  sentinel:
-    enabled: true
-  # 压缩配置
-  compression:
-    request:
-      enabled: true
-      # 配置压缩支持的MIME TYPE
-      mime-types: text/xml,application/xml,application/json
-      min-request-size: 2048  # 配置压缩数据大小的下限
-    response:
-      enabled: true # 配置响应GZIP压缩
-logging:
-  level:
-    # log 1.配置好Configuration 2.yml中配置package: debug
-    cn.beichenhpy.service.feign: debug
