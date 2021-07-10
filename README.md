@@ -51,4 +51,11 @@ spring-cloud-alibaba-nacos 1.4.2 服务发现及配置中心
 - [ ] openfeign
   - [x] client超时设置
   - [x] fallback设置
-  - [ ] sentinel结合 
+  - [ ] sentinel结合
+
+
+TODO:
+1. 重构file服务
+2. mongodb整合到support中
+3. 整合rabbitmq
+4. 整合seata
