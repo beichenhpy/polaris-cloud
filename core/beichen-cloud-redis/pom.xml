@@ -11,6 +11,7 @@
     <description>redis</description>
     <artifactId>beichen-cloud-redis</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
