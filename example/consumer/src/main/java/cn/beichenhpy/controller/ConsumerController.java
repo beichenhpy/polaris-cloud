@@ -36,7 +36,7 @@ public class ConsumerController {
     @GetMapping("/info/{aid}")
     public ResponseEntity<Article> info(@PathVariable("aid") String aid) {
         ResponseEntity<List<Comment>> response = providerFeignService.getCommentInfoByArticleId(aid);
-        AssertToolkit.feignResponseFail(response.getStatusCode(),"provider");
+        AssertToolkit.feignResponseFail(response.getStatusCode().value(),"provider");
         Article article = consumerService.getById(aid);
         article.setComments(response.getBody());
         return ResponseEntity

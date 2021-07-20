@@ -10,6 +10,9 @@
         <module>support</module>
         <module>example</module>
         <module>core</module>
+        <module>exception-handler</module>
+        <module>common</module>
+        <module>common</module>
     </modules>
 
     <parent>
@@ -113,7 +116,12 @@
             </dependency>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>support</artifactId>
+                <artifactId>exception-handler</artifactId>
+                <version>${beichen.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.beichenhpy</groupId>
+                <artifactId>common</artifactId>
                 <version>${beichen.version}</version>
             </dependency>
         </dependencies>

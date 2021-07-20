@@ -36,8 +36,11 @@
         <!--support模块-->
         <dependency>
             <groupId>cn.beichenhpy</groupId>
-            <artifactId>beichen-cloud-support-common</artifactId>
-            <version>1.0.0</version>
+            <artifactId>common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.beichenhpy</groupId>
+            <artifactId>exception-handler</artifactId>
         </dependency>
     </dependencies>
 
