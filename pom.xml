@@ -9,6 +9,7 @@
         <module>gateway</module>
         <module>support</module>
         <module>example</module>
+        <module>core</module>
     </modules>
 
     <parent>
@@ -39,6 +40,10 @@
         <hutool.version>5.5.8</hutool.version>
         <mysql.version>8.0.22</mysql.version>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
+
+
+        <!--project-version-->
+        <beichen.version>1.0.0</beichen.version>
     </properties>
 
     <!--must-->
@@ -96,21 +101,20 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>beichen-cloud-support-common</artifactId>
-                <version>1.0.0</version>
+                <artifactId>beichen-cloud-mybatis</artifactId>
+                <version>${beichen.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>beichen-cloud-support-mybatis</artifactId>
-                <version>1.0.0</version>
+                <artifactId>beichen-cloud-redis</artifactId>
+                <version>${beichen.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>beichen-cloud-support-redis</artifactId>
-                <version>1.0.0</version>
+                <artifactId>support</artifactId>
+                <version>${beichen.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
