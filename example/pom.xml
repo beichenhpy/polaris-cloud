@@ -59,9 +59,5 @@
             <groupId>cn.beichenhpy</groupId>
             <artifactId>beichen-cloud-mybatis</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cn.beichenhpy</groupId>
-            <artifactId>beichen-cloud-redis</artifactId>
-        </dependency>
     </dependencies>
 </project>
