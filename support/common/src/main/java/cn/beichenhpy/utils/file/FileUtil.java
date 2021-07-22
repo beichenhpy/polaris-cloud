@@ -25,17 +25,23 @@ public class FileUtil {
             if (!file.exists()) {
                 throw new FileNotUploadException();
             }
-            try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
-                try {
-                    byte[] buff = new byte[1024];
-                    int len;
-                    while ((len = inputStream.read(buff)) > 0) {
-                        outputStream.write(buff, 0, len);
+            try {
+                try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
+                    try {
+                        byte[] buff = new byte[1024];
+                        int len;
+                        while ((len = inputStream.read(buff)) > 0) {
+                            outputStream.write(buff, 0, len);
+                        }
+                    } catch (IOException e) {
+                        throw new FileNotUploadException();
                     }
                 } catch (IOException e) {
                     throw new FileNotUploadException();
                 }
-            } catch (IOException e) {
+                //fix:close stream
+                outputStream.close();
+            }catch (IOException e){
                 throw new FileNotUploadException();
             }
         }
