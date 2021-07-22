@@ -1,5 +1,6 @@
 package cn.beichenhpy.controller;
 
+import cn.beichenhpy.exception.file.FileNotUploadException;
 import cn.beichenhpy.modal.Article;
 import cn.beichenhpy.modal.Comment;
 import cn.beichenhpy.service.ConsumerService;
@@ -54,5 +55,10 @@ public class ConsumerController {
         LambdaUpdateWrapper<Article> update = new LambdaUpdateWrapper<Article>().eq(Article::getId, "1408375341166145537").set(Article::getTitle, "update");
         consumerService.update(update);
         throw new IllegalArgumentException("事务测试");
+    }
+
+    @GetMapping("/error")
+    public void test(){
+        throw new FileNotUploadException();
     }
 }

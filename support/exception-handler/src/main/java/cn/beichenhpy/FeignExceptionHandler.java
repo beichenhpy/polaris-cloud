@@ -2,6 +2,7 @@ package cn.beichenhpy;
 
 import cn.beichenhpy.exception.feign.FeignResponseFailException;
 import cn.beichenhpy.modal.ErrorMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,12 +18,13 @@ import java.time.LocalDateTime;
  * @apiNote feign异常处理
  * @see FeignResponseFailException 参数异常
  */
+@Slf4j
 @RestControllerAdvice
 public class FeignExceptionHandler {
 
     @ExceptionHandler(FeignResponseFailException.class)
     public ResponseEntity<ErrorMessage> FeignResponseFailExceptionHandler(HttpServletRequest request, FeignResponseFailException e) {
-        e.printStackTrace();
+        log.error(e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.SERVICE_UNAVAILABLE)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)

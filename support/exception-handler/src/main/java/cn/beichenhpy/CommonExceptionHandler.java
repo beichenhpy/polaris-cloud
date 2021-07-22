@@ -1,6 +1,7 @@
 package cn.beichenhpy;
 
 import cn.beichenhpy.modal.ErrorMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,11 +16,12 @@ import java.time.LocalDateTime;
  * @author beichenhpy
  * @apiNote 通用异常处理
  */
+@Slf4j
 @RestControllerAdvice
 public class CommonExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorMessage> illegalArgumentExceptionHandler(HttpServletRequest request, IllegalArgumentException e) {
-        e.printStackTrace();
+        log.error(e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
