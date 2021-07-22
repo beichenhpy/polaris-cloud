@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 
 /**
@@ -33,7 +34,7 @@ public class FileExceptionHandler {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     @ResponseBody
     public ResponseEntity<ErrorMessage> maxUploadSizeExceededExceptionHandler(HttpServletRequest request, MaxUploadSizeExceededException e) {
-        e.printStackTrace();
+        log.error(e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.PAYLOAD_TOO_LARGE)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -48,14 +49,15 @@ public class FileExceptionHandler {
     }
 
     @ExceptionHandler(FileNotUploadException.class)
-    public void fileNotUploadExceptionHandler(FileNotUploadException e) {
-        e.printStackTrace();
+    public void fileNotUploadExceptionHandler(FileNotUploadException e, HttpServletResponse response) {
+        log.error(e.getMessage());
+        response.setStatus(HttpStatus.NOT_FOUND.value());
     }
 
     @ExceptionHandler(FileUploadFailException.class)
     @ResponseBody
     public ResponseEntity<ErrorMessage> fileUploadFailExceptionHandler(HttpServletRequest request, FileUploadFailException e) {
-        e.printStackTrace();
+        log.error(e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -72,7 +74,7 @@ public class FileExceptionHandler {
     @ExceptionHandler(SizeException.class)
     @ResponseBody
     public ResponseEntity<ErrorMessage> fileServiceFailResponseExceptionHandler(HttpServletRequest request, SizeException e) {
-        e.printStackTrace();
+        log.error(e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
