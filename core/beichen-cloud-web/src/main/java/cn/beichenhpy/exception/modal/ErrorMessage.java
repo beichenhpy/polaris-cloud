@@ -1,4 +1,4 @@
-package cn.beichenhpy.modal;
+package cn.beichenhpy.exception.modal;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

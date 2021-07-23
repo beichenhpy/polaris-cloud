@@ -1,8 +1,8 @@
-package cn.beichenhpy;
+package cn.beichenhpy.exception.handler;
 
 import cn.beichenhpy.exception.file.FileNotUploadException;
 import cn.beichenhpy.exception.file.FileUploadFailException;
-import cn.beichenhpy.modal.ErrorMessage;
+import cn.beichenhpy.exception.modal.ErrorMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.impl.SizeException;
 import org.springframework.http.HttpHeaders;

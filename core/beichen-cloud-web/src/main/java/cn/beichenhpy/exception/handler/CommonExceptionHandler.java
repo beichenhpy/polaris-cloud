@@ -1,6 +1,6 @@
-package cn.beichenhpy;
+package cn.beichenhpy.exception.handler;
 
-import cn.beichenhpy.modal.ErrorMessage;
+import cn.beichenhpy.exception.modal.ErrorMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

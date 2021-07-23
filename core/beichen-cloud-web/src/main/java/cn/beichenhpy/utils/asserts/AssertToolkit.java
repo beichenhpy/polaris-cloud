@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * @author beichenhpy
  * @version 0.0.1
- * @apiNote AssertToolkit description：
+ * @apiNote AssertToolkit description：Assert工具类
  * @since 2021/5/11 3:57 下午
  */
 public class AssertToolkit extends Assert {
