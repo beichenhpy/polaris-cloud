@@ -1,8 +1,7 @@
 package cn.beichenhpy.utils.file;
 
 import cn.beichenhpy.exception.file.FileNotUploadException;
-import cn.beichenhpy.utils.asserts.AssertToolkit;
-import org.springframework.lang.Nullable;
+import cn.beichenhpy.exception.file.FileUploadFailException;
 
 import java.io.*;
 
@@ -52,8 +51,10 @@ public class FileUtil {
      * @param originName 原文件名
      * @return 返回生成后的 文件名 + 时间戳 + 后缀
      */
-    protected String getFilename(@Nullable String originName){
-        AssertToolkit.filenameNotNull(originName);
+    protected String getFilename(String originName){
+        if (originName == null){
+            throw new FileUploadFailException();
+        }
         String filename = originName.substring(0,originName.lastIndexOf("."));
         String contentType = originName.substring(originName.lastIndexOf("."));
         return filename + "_"  + System.currentTimeMillis() + contentType;
