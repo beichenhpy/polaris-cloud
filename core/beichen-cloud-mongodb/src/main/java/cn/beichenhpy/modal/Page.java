@@ -9,7 +9,7 @@ import java.util.List;
  * @param <T>
  * @author LaoWang
  * @since  2020-10-20
- * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-mongodb">matecloud-starter-mongodb</a>
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-mongodb">mate-starter-mongodb</a>
  */
 public class Page<T> implements Serializable {
     private static final long serialVersionUID = 5760097915453738435L;

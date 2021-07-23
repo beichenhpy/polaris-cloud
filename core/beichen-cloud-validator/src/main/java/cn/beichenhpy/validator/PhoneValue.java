@@ -10,6 +10,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * 校验手机号码格式
  *
  * @author aaronuu
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-validator">mate-starter-validator</a>
  */
 @Documented
 @Constraint(validatedBy = PhoneValueValidator.class)

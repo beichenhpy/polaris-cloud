@@ -11,7 +11,7 @@ import java.util.List;
  * 1. equals：相等
  * 2. like:mongodb的like查询
  * 3. in:用于列表的in类型查询
- * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-mongodb">matecloud-starter-mongodb</a>
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-mongodb">mate-starter-mongodb</a>
  * @author LaoWang
  * @since  2020-10-20
  *

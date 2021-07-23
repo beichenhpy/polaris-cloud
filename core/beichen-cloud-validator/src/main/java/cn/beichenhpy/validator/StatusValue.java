@@ -10,6 +10,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * 状态校验，校验参数的状态是否是 StatusEnum 中的值
  *
  * @author aaronuu
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-validator">mate-starter-validator</a>
  */
 @Documented
 @Constraint(validatedBy = StatusValueValidator.class)

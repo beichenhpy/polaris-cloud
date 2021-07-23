@@ -7,6 +7,7 @@ import lombok.Getter;
  * @version 1.0.0
  * @apiNote
  * @since 2021/7/23 22:54
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-validator">mate-starter-validator</a>
  */
 @Getter
 public enum StatusEnum {

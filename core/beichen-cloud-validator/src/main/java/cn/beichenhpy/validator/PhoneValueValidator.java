@@ -11,6 +11,7 @@ import javax.validation.ConstraintValidatorContext;
  * 校验手机号是否合法
  *
  * @author aaronuu
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-validator">mate-starter-validator</a>
  */
 public class PhoneValueValidator implements ConstraintValidator<PhoneValue, String> {
 
