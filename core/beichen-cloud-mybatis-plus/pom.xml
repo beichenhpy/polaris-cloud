@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
-    <artifactId>beichen-cloud-mybatis</artifactId>
+    <artifactId>beichen-cloud-mybatis-plus</artifactId>
     <version>1.0.0</version>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

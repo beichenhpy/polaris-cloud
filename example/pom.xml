@@ -57,7 +57,7 @@
         </dependency>
         <dependency>
             <groupId>cn.beichenhpy</groupId>
-            <artifactId>beichen-cloud-mybatis</artifactId>
+            <artifactId>beichen-cloud-mybatis-plus</artifactId>
         </dependency>
     </dependencies>
 </project>

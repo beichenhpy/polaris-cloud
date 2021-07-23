@@ -107,7 +107,7 @@
             <!--beichen-cloud-dependence-->
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>beichen-cloud-mybatis</artifactId>
+                <artifactId>beichen-cloud-mybatis-plus</artifactId>
                 <version>${beichen.version}</version>
             </dependency>
             <dependency>
