@@ -1,4 +1,4 @@
-package cn.beichenhpy.aspect;
+package cn.beichenhpy;
 
 import cn.beichenhpy.exception.NeedRollback;
 import lombok.extern.slf4j.Slf4j;
