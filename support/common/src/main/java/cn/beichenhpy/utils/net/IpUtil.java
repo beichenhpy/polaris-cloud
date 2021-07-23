@@ -13,7 +13,6 @@ import java.net.UnknownHostException;
  * @apiNote IpUtil description：获取真实ip
  * @since 2021/6/25 13:53
  */
-@Slf4j
 public class IpUtil {
     private static final String IP_UTILS_FLAG = ",";
     private static final String UNKNOWN = "unknown";
