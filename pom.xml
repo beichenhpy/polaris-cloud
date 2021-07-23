@@ -5,14 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>files</module>
         <module>gateway</module>
         <module>support</module>
         <module>example</module>
         <module>core</module>
-        <module>exception-handler</module>
-        <module>common</module>
-        <module>common</module>
     </modules>
 
     <parent>
@@ -43,7 +39,7 @@
         <hutool.version>5.5.8</hutool.version>
         <mysql.version>8.0.22</mysql.version>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
-
+        <dynamic-datasouce.version>3.3.6</dynamic-datasouce.version>
 
         <!--project-version-->
         <beichen.version>1.0.0</beichen.version>
@@ -103,7 +99,12 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-datasouce.version}</version>
+            </dependency>
+            <!--beichen-cloud-dependence-->
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
                 <artifactId>beichen-cloud-mybatis</artifactId>
