@@ -24,38 +24,4 @@ spring-cloud-alibaba-nacos 1.4.2 服务发现及配置中心
 - authFilter
 
 
-## file文件服务
-两种方式
-- 本地存储
-- mongodb-GridFs
-
-
-## support-redis
-- 提供Redis-util-只提供Util,每个服务可能对应的db都是设置不同的，所以具体配置放到对应的服务中设置
-
-## support-common
-- 提供utils
-- 提供exception
-
-## support-mybatis
-- 提供Mybatis-plus的一些配置
-
-完成进度：  
-- [x] gateway 
-- [x] nacos服务发现
-- [ ] nacos配置中心
-- [x] seata
-- [ ] sentinel
-  - [x] 与openfeign连用
-  - [ ] 超时熔断设置不生效解决
-- [ ] openfeign
-  - [x] client超时设置
-  - [x] fallback设置
-  - [ ] sentinel结合
-
-
-TODO:
-1. 重构file服务
-2. mongodb整合到support中
-3. 整合rabbitmq
-4. 整合seata
+# 重构中。。。
