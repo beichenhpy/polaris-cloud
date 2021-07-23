@@ -112,6 +112,11 @@
             </dependency>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
+                <artifactId>beichen-cloud-mongodb</artifactId>
+                <version>${beichen.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.beichenhpy</groupId>
                 <artifactId>beichen-cloud-redis</artifactId>
                 <version>${beichen.version}</version>
             </dependency>

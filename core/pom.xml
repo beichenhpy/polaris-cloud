@@ -13,7 +13,7 @@
     <modules>
         <module>beichen-cloud-mybatis-plus</module>
         <module>beichen-cloud-redis</module>
-        <module>beichen-cloud-mongo</module>
+        <module>beichen-cloud-mongodb</module>
         <module>beichen-cloud-aop</module>
         <module>beichen-cloud-web</module>
     </modules>
