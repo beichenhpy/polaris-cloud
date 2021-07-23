@@ -16,7 +16,7 @@ import java.util.List;
  * @author beichenhpy
  * @version 1.0.0
  * @apiNote 基于matecloud-starter-mongodb改造
- * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-mongodb">matecloud-starter-mongodb</a>
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-mongodb">mate-starter-mongodb</a>
  * @since 2021/7/23 20:52
  */
 public interface BaseMongoMapper<T> {

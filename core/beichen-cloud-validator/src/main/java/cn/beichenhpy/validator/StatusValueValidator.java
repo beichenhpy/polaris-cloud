@@ -10,6 +10,7 @@ import javax.validation.ConstraintValidatorContext;
  * 校验状态，判断是否为 StatusEnum 中的值
  *
  * @author aaronuu
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-validator">mate-starter-validator</a>
  */
 public class StatusValueValidator implements ConstraintValidator<StatusValue, String> {
 

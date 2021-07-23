@@ -11,6 +11,7 @@ import javax.validation.ConstraintValidatorContext;
  * 校验标识，只有Y和N两种状态的标识
  *
  * @author aaronuu
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-validator">mate-starter-validator</a>
  */
 public class FlagValueValidator implements ConstraintValidator<FlagValue, String> {
 

@@ -10,6 +10,7 @@ import javax.validation.ConstraintValidatorContext;
  * 日期校验格式，通过format的参数来校验格式
  *
  * @author aaronuu
+ * @see <a href="https://github.com/matevip/matecloud/tree/dev/mate-core/mate-starter-validator">mate-starter-validator</a>
  */
 public class DateValueValidator implements ConstraintValidator<DateValue, String> {
 
