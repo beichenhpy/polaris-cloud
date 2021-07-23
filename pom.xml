@@ -112,17 +112,27 @@
             </dependency>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
+                <artifactId>beichen-cloud-mongodb</artifactId>
+                <version>${beichen.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.beichenhpy</groupId>
                 <artifactId>beichen-cloud-redis</artifactId>
                 <version>${beichen.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>exception-handler</artifactId>
+                <artifactId>common</artifactId>
                 <version>${beichen.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>beichen-cloud-aop</artifactId>
+                <version>${beichen.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.beichenhpy</groupId>
+                <artifactId>beichen-cloud-web</artifactId>
                 <version>${beichen.version}</version>
             </dependency>
         </dependencies>

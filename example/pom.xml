@@ -23,16 +23,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <groupId>cn.beichenhpy</groupId>
+            <artifactId>beichen-cloud-web</artifactId>
         </dependency>
         <!--远程调用-->
         <dependency>
@@ -46,14 +38,6 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.beichenhpy</groupId>
-            <artifactId>common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.beichenhpy</groupId>
-            <artifactId>exception-handler</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.beichenhpy</groupId>

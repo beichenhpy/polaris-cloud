@@ -1,7 +1,7 @@
 package cn.beichenhpy.utils.net;
 
+import cn.hutool.core.util.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
@@ -13,7 +13,6 @@ import java.net.UnknownHostException;
  * @apiNote IpUtil description：获取真实ip
  * @since 2021/6/25 13:53
  */
-@Slf4j
 public class IpUtil {
     private static final String IP_UTILS_FLAG = ",";
     private static final String UNKNOWN = "unknown";
@@ -26,49 +25,42 @@ public class IpUtil {
      * 使用Nginx等反向代理软件， 则不能通过request.getRemoteAddr()获取IP地址
      * 如果使用了多级反向代理的话，X-Forwarded-For的值并不止一个，而是一串IP地址，X-Forwarded-For中第一个非unknown的有效IP字符串，则为真实IP地址
      */
-    public static String getRealIp(HttpServletRequest request) {
-        String ip = null;
-        try {
-            //以下两个获取在k8s中，将真实的客户端IP，放到了x-Original-Forwarded-For。而将WAF的回源地址放到了 x-Forwarded-For了。
-            ip = request.getHeader("X-Original-Forwarded-For");
-            if (ObjectUtils.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
-                ip = request.getHeader("X-Forwarded-For");
-            }
-            //获取nginx等代理的ip
-            if (ObjectUtils.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
-                ip = request.getHeader("x-forwarded-for");
-            }
-            if (ObjectUtils.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
-                ip = request.getHeader("Proxy-Client-IP");
-            }
-            if (ObjectUtils.isEmpty(ip) || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-                ip = request.getHeader("WL-Proxy-Client-IP");
-            }
-            if (ObjectUtils.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
-                ip = request.getHeader("HTTP_CLIENT_IP");
-            }
-            if (ObjectUtils.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
-                ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-            }
-            //兼容k8s集群获取ip
-            if (ObjectUtils.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
-                ip = request.getRemoteAddr();
-                if (LOCALHOST_IP1.equalsIgnoreCase(ip) || LOCALHOST_IP.equalsIgnoreCase(ip)) {
-                    //根据网卡取本机配置的IP
-                    InetAddress iNet;
-                    try {
-                        iNet = InetAddress.getLocalHost();
-                        ip = iNet.getHostAddress();
-                    } catch (UnknownHostException e) {
-                        log.error("getClientIp error: {}", e.getMessage());
-                    }
-                }
-            }
-        } catch (Exception e) {
-            log.error("IPUtils ERROR ", e);
+    public static String getRealIp(HttpServletRequest request) throws UnknownHostException {
+        String ip;
+        //以下两个获取在k8s中，将真实的客户端IP，放到了x-Original-Forwarded-For。而将WAF的回源地址放到了 x-Forwarded-For了。
+        ip = request.getHeader("X-Original-Forwarded-For");
+        if (ObjectUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Forwarded-For");
         }
+        //获取nginx等代理的ip
+        if (ObjectUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("x-forwarded-for");
+        }
+        if (ObjectUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ObjectUtil.isEmpty(ip) || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ObjectUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_CLIENT_IP");
+        }
+        if (ObjectUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        //兼容k8s集群获取ip
+        if (ObjectUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+            if (LOCALHOST_IP1.equalsIgnoreCase(ip) || LOCALHOST_IP.equalsIgnoreCase(ip)) {
+                //根据网卡取本机配置的IP
+                InetAddress iNet;
+                iNet = InetAddress.getLocalHost();
+                ip = iNet.getHostAddress();
+            }
+        }
+
         //使用代理，则获取第一个IP地址
-        if (!ObjectUtils.isEmpty(ip) && ip.indexOf(IP_UTILS_FLAG) > 0) {
+        if (!ObjectUtil.isEmpty(ip) && ip.indexOf(IP_UTILS_FLAG) > 0) {
             ip = ip.substring(0, ip.indexOf(IP_UTILS_FLAG));
         }
 
