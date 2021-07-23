@@ -19,8 +19,8 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-json</artifactId>
+            <groupId>cn.beichenhpy</groupId>
+            <artifactId>beichen-cloud-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
