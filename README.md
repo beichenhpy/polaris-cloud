@@ -25,3 +25,8 @@ spring-cloud-alibaba-nacos 1.4.2 服务发现及配置中心
 
 
 # 重构中。。。
+- seata
+- auth
+- job
+- mq
+- log
