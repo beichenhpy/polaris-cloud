@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>beichen-cloud-mybatis</module>
+        <module>beichen-cloud-mybatis-plus</module>
         <module>beichen-cloud-redis</module>
         <module>beichen-cloud-mongo</module>
     </modules>
