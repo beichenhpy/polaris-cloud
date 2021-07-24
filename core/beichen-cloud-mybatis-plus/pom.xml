@@ -25,5 +25,9 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.beichenhpy</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
     </dependencies>
 </project>

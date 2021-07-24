@@ -14,19 +14,20 @@ public enum IsOkEnum {
     /**
      * 是
      */
-    Y("Y", "是"),
+    Y("Y","0", "是"),
 
     /**
      * 否
      */
-    N("N", "否");
+    N("N", "-1","否");
 
     private final String code;
-
+    private final String num;
     private final String message;
 
-    IsOkEnum(String code, String message) {
+    IsOkEnum(String code,String num, String message) {
         this.code = code;
+        this.num = num;
         this.message = message;
     }
 }
