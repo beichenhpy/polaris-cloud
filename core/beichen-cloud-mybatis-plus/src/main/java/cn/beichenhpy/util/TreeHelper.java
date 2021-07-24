@@ -36,7 +36,7 @@ public class TreeHelper<T extends Tree, M extends BaseMapper<T>> {
     public List<T> getTree(String floorParentId, boolean isOneTimeMemory) {
         if (!isOneTimeMemory) {
             //设置TreeList
-            List<T> parents = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.ID.getValue(), floorParentId));
+            List<T> parents = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.PARENT_ID.getValue(), floorParentId));
             //遍历父目录
             for (T tree : parents) {
                 List<T> children = getChildren(tree.getId(), isOneTimeMemory);
