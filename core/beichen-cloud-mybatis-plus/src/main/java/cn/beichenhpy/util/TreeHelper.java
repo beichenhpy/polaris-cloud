@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 public class TreeHelper<T extends Content, M extends BaseMapper<T>> {
     @Autowired
     M mapper;
-    //为内存计算使用，查询出来的所有树信息
-    private List<T> allRows;
+    //为内存计算使用，查询出来的所有树信息,线程安全
+    private List<T> allRows = new CopyOnWriteArrayList<>();
     /** 内存比较小时可以使用
      * 查询树形结构-通过数据库
      * @param rootParentId 输入一级目录对应的id
