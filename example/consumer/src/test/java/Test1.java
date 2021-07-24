@@ -1,4 +1,5 @@
 import cn.beichenhpy.ConsumerApplication;
+import cn.beichenhpy.enums.IsOkEnum;
 import cn.beichenhpy.mapper.TreeMapper;
 import cn.beichenhpy.modal.Tree;
 import cn.beichenhpy.modal.TreeInfo;
@@ -23,7 +24,7 @@ public class Test1 {
     TreeHelper<TreeInfo,TreeMapper> treeHelper;
     @Test
     public void test(){
-        List<Tree> tree = treeHelper.getTree();
+        List<Tree> tree = treeHelper.getTree(IsOkEnum.N.getNum());
         log.info("{}",tree);
         TreeInfo treeInfo = new TreeInfo();
         treeInfo.setId("1");

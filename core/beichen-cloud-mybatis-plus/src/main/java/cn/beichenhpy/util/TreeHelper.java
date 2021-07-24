@@ -21,8 +21,13 @@ public class TreeHelper<T extends Content, M extends BaseMapper<T>> {
     @Autowired
     M mapper;
 
-    public List<Tree> getTree() {
-        List<T> contents = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.PARENT_ID.getValue(), IsOkEnum.N.getNum()));
+    /**
+     * 查询树形结构
+     * @param rootParentId 输入一级目录对应的id
+     * @return 整个树
+     */
+    public List<Tree> getTree(String rootParentId) {
+        List<T> contents = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.PARENT_ID.getValue(), rootParentId));
         //设置TreeList
         List<Tree> parents = prepare(contents);
         //遍历父目录
