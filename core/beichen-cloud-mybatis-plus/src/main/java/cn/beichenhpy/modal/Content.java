@@ -9,7 +9,7 @@ import lombok.Setter;
 /**
  * @author beichenhpy
  * @version 1.0.0
- * @apiNote
+ * @apiNote 业务实体基类
  * @since 2021/7/24 14:37
  */
 @Data
