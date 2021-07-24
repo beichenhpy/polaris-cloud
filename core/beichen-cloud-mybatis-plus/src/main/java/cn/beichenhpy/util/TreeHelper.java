@@ -28,13 +28,15 @@ public class TreeHelper<T extends Tree, M extends BaseMapper<T>> {
      * 内存比较小时可以使用
      * 查询树形结构-通过数据库
      * @param isOneTimeMemory 是否为一次性加载到内存
-     * @param rootParentId 输入一级目录对应的id
+     * @param floorParentId 输入(层数-1)层的id
+     *                      [比如想要查第二层开始的树形结构，那么需要输入第一层的节点的id (从上到下数)]
+     *                      注意：如果查顶层的则输入'-1'
      * @return 整个树
      */
-    public List<T> getTree(String rootParentId, boolean isOneTimeMemory) {
+    public List<T> getTree(String floorParentId, boolean isOneTimeMemory) {
         if (!isOneTimeMemory) {
             //设置TreeList
-            List<T> parents = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.ID.getValue(), rootParentId));
+            List<T> parents = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.ID.getValue(), floorParentId));
             //遍历父目录
             for (T tree : parents) {
                 List<T> children = getChildren(tree.getId(), isOneTimeMemory);
@@ -44,7 +46,7 @@ public class TreeHelper<T extends Tree, M extends BaseMapper<T>> {
         } else {
             allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
             List<T> parents = allRows.stream()
-                    .filter(t -> rootParentId.equals(t.getParentId()))
+                    .filter(t -> floorParentId.equals(t.getParentId()))
                     .collect(Collectors.toList());
             //遍历父目录
             for (T tree : parents) {
