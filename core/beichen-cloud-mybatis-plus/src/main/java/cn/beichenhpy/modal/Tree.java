@@ -8,17 +8,16 @@ import java.util.List;
 /**
  * @author beichenhpy
  * @version 1.0.0
- * @apiNote 树及结构 content为具体查询内容
+ * @apiNote 树及结构 子类可进行扩充
  * @since 2021/7/24 12:57
  */
 @Data
 public class Tree{
-    /**
-     * 业务字段基类
-     */
-    private Content content;
+    private String id;
+    private String parentId;
     /**
      * 叶子节点，（下一级）
      */
-    private List<Tree> children;
+    @TableField(exist = false)
+    private List<? extends Tree> children;
 }
