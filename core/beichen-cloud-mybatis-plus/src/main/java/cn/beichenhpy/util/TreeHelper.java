@@ -16,7 +16,9 @@ import java.util.stream.Collectors;
 /**
  * @author beichenhpy
  * @version 1.0.0
- * @apiNote M mapper T 为查询类
+ * @apiNote M mapper T 为查询类 用于查询树状层级结构，业务字段继承Content类
+ * @see Content 业务实体类基类
+ * @see Tree 树数据结构
  * @since 2021/7/24 12:53
  */
 public class TreeHelper<T extends Content, M extends BaseMapper<T>> {
@@ -24,8 +26,11 @@ public class TreeHelper<T extends Content, M extends BaseMapper<T>> {
     M mapper;
     //为内存计算使用，查询出来的所有树信息,线程安全
     private List<T> allRows;
-    /** 内存比较小时可以使用
+
+    /**
+     * 内存比较小时可以使用
      * 查询树形结构-通过数据库
+     *
      * @param rootParentId 输入一级目录对应的id
      * @return 整个树
      */
@@ -46,6 +51,7 @@ public class TreeHelper<T extends Content, M extends BaseMapper<T>> {
      * 推荐使用 速度快
      * 查询树形结构-通过内存
      * 只查询一次，所有数据加载到内存中
+     *
      * @param rootParentId 输入一级目录对应的id
      * @return 整个树
      */
@@ -99,6 +105,7 @@ public class TreeHelper<T extends Content, M extends BaseMapper<T>> {
         //未查询到结束递归
         return null;
     }
+
     /**
      * 获取子目录 通过内存filter
      *

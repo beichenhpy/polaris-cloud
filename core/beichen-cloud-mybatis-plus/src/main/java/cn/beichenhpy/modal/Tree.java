@@ -13,6 +13,12 @@ import java.util.List;
  */
 @Data
 public class Tree{
+    /**
+     * 业务字段基类
+     */
     private Content content;
+    /**
+     * 叶子节点，（下一级）
+     */
     private List<Tree> children;
 }
