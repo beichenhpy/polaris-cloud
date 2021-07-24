@@ -23,7 +23,7 @@ public class TreeHelper<T extends Content, M extends BaseMapper<T>> {
     @Autowired
     M mapper;
     //为内存计算使用，查询出来的所有树信息,线程安全
-    private List<T> allRows = new CopyOnWriteArrayList<>();
+    private List<T> allRows;
     /** 内存比较小时可以使用
      * 查询树形结构-通过数据库
      * @param rootParentId 输入一级目录对应的id
@@ -50,7 +50,8 @@ public class TreeHelper<T extends Content, M extends BaseMapper<T>> {
      * @return 整个树
      */
     public List<Tree> getTreeByMemory(String rootParentId) {
-        allRows = mapper.selectList(null);
+        //调用时初始化
+        allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
         List<T> contents = allRows.stream().filter(t -> rootParentId.equals(t.getParentId())).collect(Collectors.toList());
         //设置TreeList
         List<Tree> parents = prepare(contents);
