@@ -1,6 +1,7 @@
 package cn.beichenhpy.config;
 
 import cn.beichenhpy.handler.FiledInjectHandler;
+import cn.beichenhpy.util.TreeHelper;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@Import(FiledInjectHandler.class)
+@Import({FiledInjectHandler.class, TreeHelper.class})
 public class MybatisPlusConfig {
     /**
      * 分页插件
