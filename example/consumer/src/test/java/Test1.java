@@ -28,10 +28,11 @@ public class Test1 {
         List<Tree> tree = treeHelper.getTree("-1");
         long end = System.currentTimeMillis() - start;
         log.info("db:cost:{}",end);
-
+        log.info("result:db:{}",tree);
         long mstart = System.currentTimeMillis();
         List<Tree> treeByMemory = treeHelper.getTreeByMemory("-1");
         long endm = System.currentTimeMillis() - mstart;
         log.info("memory:cost:{}",endm);
+        log.info("result:memory:{}",treeByMemory);
     }
 }
