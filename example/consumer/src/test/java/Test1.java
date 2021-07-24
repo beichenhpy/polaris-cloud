@@ -24,10 +24,14 @@ public class Test1 {
     TreeHelper<TreeInfo,TreeMapper> treeHelper;
     @Test
     public void test(){
-        List<Tree> tree = treeHelper.getTree(IsOkEnum.N.getNum());
-        log.info("{}",tree);
-        TreeInfo treeInfo = new TreeInfo();
-        treeInfo.setId("1");
-        log.info("{}",treeInfo);
+        long start = System.currentTimeMillis();
+        List<Tree> tree = treeHelper.getTree("-1");
+        long end = System.currentTimeMillis() - start;
+        log.info("db:cost:{}",end);
+
+        long mstart = System.currentTimeMillis();
+        List<Tree> treeByMemory = treeHelper.getTreeByMemory("-1");
+        long endm = System.currentTimeMillis() - mstart;
+        log.info("memory:cost:{}",endm);
     }
 }
