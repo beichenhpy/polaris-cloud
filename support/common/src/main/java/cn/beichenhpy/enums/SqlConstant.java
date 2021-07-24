@@ -10,6 +10,7 @@ import lombok.Getter;
  */
 @Getter
 public enum SqlConstant {
+    ID("id","id"),
     PARENT_ID("parent_id","树形父级id");
 
     private final String value;

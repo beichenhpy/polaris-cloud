@@ -25,14 +25,14 @@ public class Test1 {
     @Test
     public void test(){
         long start = System.currentTimeMillis();
-        List<Tree> tree = treeHelper.getTree("-1");
+        List<TreeInfo> tree = treeHelper.getTree("0",false);
         long end = System.currentTimeMillis() - start;
         log.info("db:cost:{}",end);
         log.info("result:db:{}",tree);
-        long mstart = System.currentTimeMillis();
-        List<Tree> treeByMemory = treeHelper.getTreeByMemory("-1");
-        long endm = System.currentTimeMillis() - mstart;
-        log.info("memory:cost:{}",endm);
-        log.info("result:memory:{}",treeByMemory);
+        long start1 = System.currentTimeMillis();
+        List<TreeInfo> tree2 = treeHelper.getTree("0",true);
+        long end1 = System.currentTimeMillis() - start1;
+        log.info("me:cost:{}",end1);
+        log.info("result:me:{}",tree2);
     }
 }

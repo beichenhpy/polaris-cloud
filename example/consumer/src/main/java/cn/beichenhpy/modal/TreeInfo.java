@@ -13,6 +13,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @TableName("tree")
 @Data
-public class TreeInfo extends Content{
+public class TreeInfo extends Tree{
     private String name;
 }
