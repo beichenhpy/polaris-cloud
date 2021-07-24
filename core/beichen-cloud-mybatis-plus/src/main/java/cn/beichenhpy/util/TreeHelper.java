@@ -51,7 +51,7 @@ public class TreeHelper<T extends Content, M extends BaseMapper<T>> {
      */
     public List<Tree> getTreeByMemory(String rootParentId) {
         allRows = mapper.selectList(null);
-        List<T> contents = allRows.stream().filter(t -> IsOkEnum.N.getNum().equals(t.getParentId())).collect(Collectors.toList());
+        List<T> contents = allRows.stream().filter(t -> rootParentId.equals(t.getParentId())).collect(Collectors.toList());
         //设置TreeList
         List<Tree> parents = prepare(contents);
         //遍历父目录
