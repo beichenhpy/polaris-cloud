@@ -26,7 +26,7 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
     private List<T> allRows;
     //当前对应的层数
     private Integer currentFloorNum;
-
+    private boolean isInitial = false;
     /**
      * 通过api新增层级时调用，刷新成员变量AllRows
      */
@@ -42,8 +42,9 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
      */
     public List<T> getTree(Integer floor) {
         //加载一次,缓存机制
-        if (allRows != null){
+        if (!isInitial){
             updateCache();
+            isInitial = true;
         }
         //重置当前层数
         currentFloorNum = floor - 1;
@@ -59,8 +60,8 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
      */
     public List<T> getTree(Integer floor, boolean isOneTimeMemory) {
         //加载一次，缓存机制
-        if (isOneTimeMemory && allRows != null) {
-            updateCache();
+        if (isOneTimeMemory) {
+            return getTree(floor);
         }
         //重置当前层数
         currentFloorNum = floor - 1;
