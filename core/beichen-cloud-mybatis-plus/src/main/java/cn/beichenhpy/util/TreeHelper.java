@@ -67,8 +67,10 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
             trees = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.PARENT_ID.getValue(), parentId));
             if (!trees.isEmpty()) {
                 currentFloorNum++;
+                //bugfix 由于递归深入会改变成员变量，所以要新建中间临时变量存储当前的层数
+                int tempFloor = currentFloorNum;
                 for (T tree : trees) {
-                    tree.setCurrentFloorNum(currentFloorNum);
+                    tree.setCurrentFloorNum(tempFloor);
                     //递归查询，直到return null结束
                     tree.setChildren(getChildren(tree.getId(), false));
                 }
@@ -81,8 +83,10 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
                     .collect(Collectors.toList());
             if (!trees.isEmpty()) {
                 currentFloorNum++;
+                //bugfix 由于递归深入会改变成员变量，所以要新建中间临时变量存储当前的层数
+                int tempFloor = currentFloorNum;
                 for (T tree : trees) {
-                    tree.setCurrentFloorNum(currentFloorNum);
+                    tree.setCurrentFloorNum(tempFloor);
                     //递归查询，直到return null结束
                     tree.setChildren(getChildren(tree.getId(), true));
                 }
