@@ -28,13 +28,23 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
     private Integer currentFloorNum;
 
     /**
+     * 通过api新增层级时调用，刷新成员变量AllRows
+     */
+    public void updateCache(){
+        allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
+    }
+
+    /**
      * 缺省的方法查询树形结构 默认使用一次加载到内存
      *
      * @param floor 层数 从上到下
      * @return 返回树形结构
      */
     public List<T> getTree(Integer floor) {
-        allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
+        //加载一次,缓存机制
+        if (allRows != null){
+            updateCache();
+        }
         //重置当前层数
         currentFloorNum = floor - 1;
         return getChildren(floor - 1, true);
@@ -48,8 +58,9 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
      * @return 返回树形结构
      */
     public List<T> getTree(Integer floor, boolean isOneTimeMemory) {
-        if (isOneTimeMemory) {
-            allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
+        //加载一次，缓存机制
+        if (isOneTimeMemory && allRows != null) {
+            updateCache();
         }
         //重置当前层数
         currentFloorNum = floor - 1;
