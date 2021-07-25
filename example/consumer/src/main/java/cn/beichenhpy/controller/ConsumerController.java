@@ -1,10 +1,13 @@
 package cn.beichenhpy.controller;
 
 import cn.beichenhpy.exception.file.FileNotUploadException;
+import cn.beichenhpy.mapper.TreeMapper;
 import cn.beichenhpy.modal.Article;
 import cn.beichenhpy.modal.Comment;
+import cn.beichenhpy.modal.TreeInfo;
 import cn.beichenhpy.service.ConsumerService;
 import cn.beichenhpy.service.feign.ProviderFeignService;
+import cn.beichenhpy.util.TreeHelper;
 import cn.beichenhpy.utils.asserts.AssertToolkit;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -28,6 +31,7 @@ public class ConsumerController {
 
     private final ProviderFeignService providerFeignService;
     private final ConsumerService consumerService;
+    private final TreeHelper<TreeInfo, TreeMapper> treeHelper;
     /**
      * 配置异常数 fallback生效
      * 注意：fallback的方法参数必须与修饰的相同，可以添加异常类
@@ -60,5 +64,10 @@ public class ConsumerController {
     @GetMapping("/error")
     public void test(){
         throw new FileNotUploadException();
+    }
+
+    @GetMapping("/tree")
+    public List<TreeInfo> getTree(){
+        return treeHelper.getTree(1);
     }
 }
