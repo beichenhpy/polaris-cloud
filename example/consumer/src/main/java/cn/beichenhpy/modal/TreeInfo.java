@@ -1,5 +1,6 @@
 package cn.beichenhpy.modal;
 
+import cn.beichenhpy.util.TreeHelper;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
@@ -13,6 +14,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @TableName("tree")
 @Data
-public class TreeInfo extends Tree{
+public class TreeInfo extends TreeHelper.Tree{
     private String name;
 }
