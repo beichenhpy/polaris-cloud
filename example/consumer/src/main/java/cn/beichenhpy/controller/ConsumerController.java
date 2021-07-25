@@ -65,6 +65,6 @@ public class ConsumerController {
 
     @GetMapping("/tree")
     public List<TreeInfo> getTree(@RequestParam("floor") int floor){
-        return treeHelper.getTree(floor);
+        return treeHelper.getTree(floor,false);
     }
 }

@@ -24,13 +24,16 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
     M mapper;
     //为内存计算使用，查询出来的所有树信息,线程安全
     private List<T> allRows;
+    //每次查询都会更新 数据库方法
+    private List<T> noCacheAllRows;
     //当前对应的层数
     private Integer currentFloorNum;
     private boolean isInitial = false;
+
     /**
      * 通过api新增层级时调用，刷新成员变量AllRows
      */
-    public void updateCache(){
+    public void updateCache() {
         allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
     }
 
@@ -41,14 +44,15 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
      * @return 返回树形结构
      */
     public List<T> getTree(Integer floor) {
+        int parentId = floor - 1;
         //加载一次,缓存机制
-        if (!isInitial){
+        if (!isInitial) {
             updateCache();
             isInitial = true;
         }
         //重置当前层数
-        currentFloorNum = floor - 1;
-        return getChildren(floor - 1, true);
+        currentFloorNum = parentId;
+        return getChildren(parentId, true);
     }
 
     /**
@@ -59,13 +63,15 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
      * @return 返回树形结构
      */
     public List<T> getTree(Integer floor, boolean isOneTimeMemory) {
+        int parentId = floor - 1;
         //加载一次，缓存机制
         if (isOneTimeMemory) {
             return getTree(floor);
         }
         //重置当前层数
-        currentFloorNum = floor - 1;
-        return getChildren(floor - 1, isOneTimeMemory);
+        currentFloorNum = parentId;
+        noCacheAllRows = mapper.selectList(new QueryWrapper<T>().ge(SqlConstant.PARENT_ID.getValue(), parentId));
+        return getChildren(parentId, false);
     }
 
     /**
@@ -76,34 +82,24 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
     private List<T> getChildren(Integer parentId, boolean isOneTimeMemory) {
         List<T> trees;
         if (!isOneTimeMemory) {
-            trees = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.PARENT_ID.getValue(), parentId));
-            if (!trees.isEmpty()) {
-                currentFloorNum++;
-                //bugfix 由于递归深入会改变成员变量，所以要新建中间临时变量存储当前的层数
-                int tempFloor = currentFloorNum;
-                for (T tree : trees) {
-                    tree.setCurrentFloorNum(tempFloor);
-                    //递归查询，直到return null结束
-                    tree.setChildren(getChildren(tree.getId(), false));
-                }
-                return trees;
-            }
+            trees = noCacheAllRows.stream()
+                    .filter(t -> parentId.equals(t.getParentId()))
+                    .collect(Collectors.toList());
         } else {
-            //内存中筛选
             trees = allRows.stream()
                     .filter(t -> parentId.equals(t.getParentId()))
                     .collect(Collectors.toList());
-            if (!trees.isEmpty()) {
-                currentFloorNum++;
-                //bugfix 由于递归深入会改变成员变量，所以要新建中间临时变量存储当前的层数
-                int tempFloor = currentFloorNum;
-                for (T tree : trees) {
-                    tree.setCurrentFloorNum(tempFloor);
-                    //递归查询，直到return null结束
-                    tree.setChildren(getChildren(tree.getId(), true));
-                }
-                return trees;
+        }
+        if (!trees.isEmpty()) {
+            currentFloorNum++;
+            //bugfix 由于递归深入会改变成员变量，所以要新建中间临时变量存储当前的层数
+            int tempFloor = currentFloorNum;
+            for (T tree : trees) {
+                tree.setCurrentFloorNum(tempFloor);
+                //递归查询，直到return null结束
+                tree.setChildren(getChildren(tree.getId(), isOneTimeMemory));
             }
+            return trees;
         }
         //未查询到结束递归
         return null;
