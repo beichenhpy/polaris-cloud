@@ -9,7 +9,7 @@ CREATE TABLE `tree` (
 
 
 INSERT INTO tree values (1,0,'一级目录-1');
-INSERT INTO tree values (2,1,'二级目录-0');
+INSERT INTO tree values (2,1,'二级目录-1');
 INSERT INTO tree values (3,1,'二级目录-1');
 INSERT INTO tree values (4,1,'二级目录-1');
 INSERT INTO tree values (5,2,'二级目录-2');
