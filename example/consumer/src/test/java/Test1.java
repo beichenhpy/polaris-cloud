@@ -22,15 +22,15 @@ public class Test1 {
     TreeHelper<TreeInfo,TreeMapper> treeHelper;
     @Test
     public void test(){
-        long start = System.currentTimeMillis();
-        List<TreeInfo> tree = treeHelper.getTree("1",false);
-        long end = System.currentTimeMillis() - start;
-        log.info("db:cost:{}",end);
-        log.info("result:db:{}",tree);
         long start1 = System.currentTimeMillis();
-        List<TreeInfo> tree2 = treeHelper.getTree("1",true);
+        List<TreeInfo> tree2 = treeHelper.getTree(3,false);
         long end1 = System.currentTimeMillis() - start1;
         log.info("me:cost:{}",end1);
         log.info("result:me:{}",tree2);
+        long start = System.currentTimeMillis();
+        List<TreeInfo> tree = treeHelper.getTree(3,true);
+        long end = System.currentTimeMillis() - start;
+        log.info("me:cost:{}",end);
+        log.info("result:me:{}",tree);
     }
 }

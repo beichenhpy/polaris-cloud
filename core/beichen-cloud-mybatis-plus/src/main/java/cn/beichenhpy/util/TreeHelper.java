@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
  * @author beichenhpy
  * @version 1.0.0
  * @apiNote M mapper T 为Tree的子类 用于查询树状层级结构
+ * <br>重要：1. 数据库对应的parentId 和 id 需要为int类型 2. 层数为从上到下
  * @see Tree 树数据结构
  * @since 2021/7/24 12:53
  */
@@ -23,81 +24,51 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
     M mapper;
     //为内存计算使用，查询出来的所有树信息,线程安全
     private List<T> allRows;
+    //当前对应的层数
+    private Integer currentFloorNum;
 
     /**
      * 缺省的方法查询树形结构 默认使用一次加载到内存
      *
-     * @param floorParentId 输入(层数-1)层的id
-     *                      [比如想要查第二层开始的树形结构，那么需要输入第一层的节点的id (从上到下数)]
-     *                      注意：如果查顶层的则输入'-1'
+     * @param floor 层数 从上到下
      * @return 返回树形结构
      */
-    public List<T> getTree(String floorParentId) {
-        return getParent(floorParentId, true);
+    public List<T> getTree(Integer floor) {
+        allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
+        //重置当前层数
+        currentFloorNum = floor - 1;
+        return getChildren(floor - 1, true);
     }
 
     /**
      * 缺省的方法查询树形结构 默认使用一次加载到内存
      *
-     * @param floorParentId   输入(层数-1)层的id
-     *                        [比如想要查第二层开始的树形结构，那么需要输入第一层的节点的id (从上到下数)]
-     *                        注意：如果查顶层的则输入'-1'
+     * @param floor           层数 从上到下
      * @param isOneTimeMemory 是否一次性加载到内存
      * @return 返回树形结构
      */
-    public List<T> getTree(String floorParentId, boolean isOneTimeMemory) {
-        return getParent(floorParentId, isOneTimeMemory);
+    public List<T> getTree(Integer floor, boolean isOneTimeMemory) {
+        if (isOneTimeMemory) {
+            allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
+        }
+        //重置当前层数
+        currentFloorNum = floor - 1;
+        return getChildren(floor - 1, isOneTimeMemory);
     }
 
-
     /**
-     * 内存比较小时可以使用
-     * 查询树形结构-通过数据库
-     *
      * @param isOneTimeMemory 是否为一次性加载到内存
-     * @param floorParentId   输入(层数-1)层的id
-     *                        [比如想要查第二层开始的树形结构，那么需要输入第一层的节点的id (从上到下数)]
-     *                        注意：如果查顶层的则输入'-1'
+     * @param parentId        负极目录id
      * @return 整个树
      */
-    private List<T> getParent(String floorParentId, boolean isOneTimeMemory) {
-        List<T> parents, children;
-        if (!isOneTimeMemory) {
-            //设置TreeList
-            parents = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.PARENT_ID.getValue(), floorParentId));
-            //遍历父目录
-            for (T tree : parents) {
-                children = getChildren(tree.getId(), false);
-                tree.setChildren(children);
-            }
-            return parents;
-        } else {
-            allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
-            parents = allRows.stream()
-                    .filter(t -> floorParentId.equals(t.getParentId()))
-                    .collect(Collectors.toList());
-            //遍历父目录
-            for (T tree : parents) {
-                children = getChildren(tree.getId(), true);
-                tree.setChildren(children);
-            }
-            return parents;
-        }
-    }
-
-
-    /**
-     * 获取子目录-通过遍历查询数据库
-     *
-     * @param parentId 父目录id
-     * @return 返回子目录
-     */
-    private List<T> getChildren(String parentId, boolean isOneTimeMemory) {
+    private List<T> getChildren(Integer parentId, boolean isOneTimeMemory) {
         List<T> trees;
         if (!isOneTimeMemory) {
             trees = mapper.selectList(new QueryWrapper<T>().eq(SqlConstant.PARENT_ID.getValue(), parentId));
             if (!trees.isEmpty()) {
+                currentFloorNum++;
                 for (T tree : trees) {
+                    tree.setCurrentFloorNum(currentFloorNum);
                     //递归查询，直到return null结束
                     tree.setChildren(getChildren(tree.getId(), false));
                 }
@@ -109,7 +80,9 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
                     .filter(t -> parentId.equals(t.getParentId()))
                     .collect(Collectors.toList());
             if (!trees.isEmpty()) {
+                currentFloorNum++;
                 for (T tree : trees) {
+                    tree.setCurrentFloorNum(currentFloorNum);
                     //递归查询，直到return null结束
                     tree.setChildren(getChildren(tree.getId(), true));
                 }
@@ -127,9 +100,14 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
      * @since 2021/7/24 12:57
      */
     @Data
-    public static class Tree{
-        private String id;
-        private String parentId;
+    public static class Tree {
+        private Integer id;
+        private Integer parentId;
+        /**
+         * 当前目录层级
+         */
+        @TableField(exist = false)
+        private Integer currentFloorNum;
         /**
          * 叶子节点，（下一级）
          */
