@@ -1,7 +1,9 @@
 package cn.beichenhpy.util;
 
 import cn.beichenhpy.enums.SqlConstant;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import lombok.Data;
@@ -113,6 +115,7 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
      */
     @Data
     public static class Tree {
+        @TableId(type = IdType.AUTO)
         private Integer id;
         private Integer parentId;
         /**
