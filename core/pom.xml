@@ -17,6 +17,7 @@
         <module>beichen-cloud-aop</module>
         <module>beichen-cloud-web</module>
         <module>beichen-cloud-validator</module>
+        <module>beichen-cloud-dependencies</module>
     </modules>
     <artifactId>core</artifactId>
 
