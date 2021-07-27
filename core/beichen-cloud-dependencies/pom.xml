@@ -23,6 +23,8 @@
         <mysql.version>8.0.22</mysql.version>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
         <dynamic-datasouce.version>3.3.6</dynamic-datasouce.version>
+        <hutool.version>5.5.8</hutool.version>
+        <lombok.version>1.18.12</lombok.version>
 
         <beichen.version>1.0.0</beichen.version>
         <!--Plugin-->
@@ -68,6 +70,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <optional>true</optional>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
             <!--database-->
             <dependency>
                 <groupId>mysql</groupId>
@@ -102,7 +115,7 @@
             </dependency>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>beichen-cloud-tools</artifactId>
                 <version>${beichen.version}</version>
             </dependency>
             <dependency>

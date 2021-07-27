@@ -15,7 +15,6 @@
         <module>provider</module>
         <module>consumer</module>
         <module>example-redis</module>
-        <module>example-mongodb</module>
     </modules>
 
     <properties>

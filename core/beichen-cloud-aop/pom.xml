@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>cn.beichenhpy</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>beichen-cloud-tools</artifactId>
         </dependency>
     </dependencies>
 

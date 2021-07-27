@@ -25,7 +25,7 @@
         <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-dockerfile-plugin.version>1.4.10</maven-dockerfile-plugin.version>
-        <maven.plugin.version>3.8.1</maven.plugin.version>
+        <maven-plugin.version>3.8.1</maven-plugin.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <java.version>11</java.version>
@@ -34,36 +34,9 @@
         <beichen.version>1.0.0</beichen.version>
         <hutool.version>5.5.8</hutool.version>
         <lombok.version>1.18.12</lombok.version>
-        <spring.boot.version>2.4.5</spring.boot.version>
+        <spring-boot.version>2.4.5</spring-boot.version>
     </properties>
 
-    <!--must-->
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-            <version>${lombok.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>${hutool.version}</version>
-        </dependency>
-        <!--        单元测试 使用idea的测试-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
-            <version>${spring.boot.version}</version>
-        </dependency>
-    </dependencies>
     <!--option-->
     <dependencyManagement>
         <dependencies>
@@ -94,7 +67,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring.boot.version}</version>
+                    <version>${spring-boot.version}</version>
                     <configuration>
                         <fork>true</fork>
                         <finalName>${project.build.finalName}</finalName>
@@ -136,7 +109,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.plugin.version}</version>
+                <version>${maven-plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
