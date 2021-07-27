@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@Import({FiledInjectHandler.class, TreeHelper.class})
+@Import({FiledInjectHandler.class})
 public class MybatisPlusConfig {
     /**
      * 分页插件
