@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.5</version>
+        <version>2.4.9</version>
         <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -19,13 +19,14 @@
         <maven.compiler.target>11</maven.compiler.target>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
-        <spring.boot.version>2.4.5</spring.boot.version>
+        <spring.boot.version>2.4.9</spring.boot.version>
         <!--other tool version-->
         <mysql.version>8.0.22</mysql.version>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
         <dynamic-datasouce.version>3.3.6</dynamic-datasouce.version>
         <hutool.version>5.5.8</hutool.version>
         <lombok.version>1.18.12</lombok.version>
+        <xxl-job.version>2.3.0</xxl-job.version>
 
         <beichen.version>1.0.0</beichen.version>
         <!--Plugin-->
@@ -105,6 +106,11 @@
                 <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
                 <version>${dynamic-datasouce.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
             <!--beichen-cloud-dependence-->
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
@@ -139,6 +145,11 @@
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
                 <artifactId>beichen-cloud-validator</artifactId>
+                <version>${beichen.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.beichenhpy</groupId>
+                <artifactId>beichen-cloud-job</artifactId>
                 <version>${beichen.version}</version>
             </dependency>
         </dependencies>

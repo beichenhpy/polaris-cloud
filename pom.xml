@@ -34,7 +34,7 @@
         <beichen.version>1.0.0</beichen.version>
         <hutool.version>5.5.8</hutool.version>
         <lombok.version>1.18.12</lombok.version>
-        <spring-boot.version>2.4.5</spring-boot.version>
+        <spring-boot.version>2.4.9</spring-boot.version>
     </properties>
 
     <!--option-->
