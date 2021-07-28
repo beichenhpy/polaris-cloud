@@ -21,18 +21,18 @@ import java.util.List;
 @SpringBootTest(classes = ConsumerApplication.class)
 public class Test1 {
     @Autowired
-    TreeMapper treeMapper;
+    TreeHelper<TreeInfo,TreeMapper> treeHelper;
     @Resource
     private JobProperties jobProperties;
     @Test
     public void test(){
         long start1 = System.currentTimeMillis();
-        List<TreeInfo> tree2 = TreeHelper.getTree(treeMapper,3);
+        List<TreeInfo> tree2 = treeHelper.getTree(3);
         long end1 = System.currentTimeMillis() - start1;
         log.info("me:cost:{}",end1);
         log.info("result:me:{}",tree2);
         long start = System.currentTimeMillis();
-        List<TreeInfo> tree = TreeHelper.getTree(treeMapper,3);
+        List<TreeInfo> tree = treeHelper.getTree(3);
         long end = System.currentTimeMillis() - start;
         log.info("me:cost:{}",end);
         log.info("result:me:{}",tree);

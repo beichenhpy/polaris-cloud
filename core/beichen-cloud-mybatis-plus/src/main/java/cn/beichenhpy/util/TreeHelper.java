@@ -1,12 +1,16 @@
 package cn.beichenhpy.util;
 
+import cn.beichenhpy.enums.SqlConstant;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -14,26 +18,30 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  * @apiNote M mapper T 为Tree的子类 用于查询树状层级结构
  * <br>重要：1. 数据库对应的parentId 和 id 需要为int类型 2. 层数为从上到下
+ * <br> 不足：需要手动配置bean，不然统一配置会无法注入泛型
  * @see Tree 树数据结构
  * @since 2021/7/24 12:53
- * <br> 2021/7/28 23:08 updated
  */
 public class TreeHelper {
 
     /**
      * 双检锁赋值
-     *
-     * @return 初始化的所有行
      */
-    public static <T extends TreeHelper.Tree, M extends BaseMapper<T>> List<T> init(M mapper) {
-        return mapper.selectList(null);
+    public void init(){
+        if (allRows == null) {
+            synchronized (TreeHelper.class) {
+                if (allRows == null) {
+                    allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
+                }
+            }
+        }
     }
 
     /**
      * 通过api新增层级时调用，刷新成员变量AllRows
      */
-    public static <T extends TreeHelper.Tree, M extends BaseMapper<T>> void updateCache(M mapper) {
-        init(mapper);
+    public void updateCache() {
+        init();
     }
 
     /**
@@ -42,10 +50,11 @@ public class TreeHelper {
      * @param floor 层数 从上到下
      * @return 返回树形结构
      */
-    public static <T extends TreeHelper.Tree, M extends BaseMapper<T>> List<T> getTree(M mapper, Integer floor) {
+    public List<T> getTree(Integer floor) {
         int parentId = floor - 1;
-        List<T> allRows = init(mapper);
-        return getChildren(allRows, parentId);
+        init();
+        //重置当前层数
+        return getChildren(parentId);
     }
 
 
@@ -53,7 +62,7 @@ public class TreeHelper {
      * @param parentId 负极目录id
      * @return 整个树
      */
-    private static <T extends TreeHelper.Tree> List<T> getChildren(List<T> allRows, Integer parentId) {
+    private List<T> getChildren(Integer parentId) {
         List<T> trees;
         int floor = parentId;
         trees = allRows.stream()
@@ -64,7 +73,7 @@ public class TreeHelper {
             for (T tree : trees) {
                 tree.setCurrentFloorNum(floor);
                 //递归查询，直到return null结束
-                tree.setChildren(getChildren(allRows, tree.getId()));
+                tree.setChildren(getChildren(tree.getId()));
             }
             return trees;
         }
