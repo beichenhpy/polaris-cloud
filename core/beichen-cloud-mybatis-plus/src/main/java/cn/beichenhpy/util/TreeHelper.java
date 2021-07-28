@@ -22,7 +22,13 @@ import java.util.stream.Collectors;
  * @see Tree 树数据结构
  * @since 2021/7/24 12:53
  */
-public class TreeHelper {
+public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
+
+    @Autowired
+    M mapper;
+
+    //为内存计算使用，查询出来的所有树信息,线程安全
+    private volatile List<T> allRows;
 
     /**
      * 双检锁赋值
@@ -59,7 +65,7 @@ public class TreeHelper {
 
 
     /**
-     * @param parentId 负极目录id
+     * @param parentId        负极目录id
      * @return 整个树
      */
     private List<T> getChildren(Integer parentId) {
