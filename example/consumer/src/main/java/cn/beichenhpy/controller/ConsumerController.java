@@ -26,7 +26,7 @@ public class ConsumerController {
 
     private final ProviderFeignService providerFeignService;
     private final ConsumerService consumerService;
-    private final TreeHelper<TreeInfo, TreeMapper> treeHelper;
+    private final TreeMapper treeMapper;
     /**
      * 配置异常数 fallback生效
      * 注意：fallback的方法参数必须与修饰的相同，可以添加异常类
@@ -63,6 +63,6 @@ public class ConsumerController {
 
     @GetMapping("/tree")
     public List<TreeInfo> getTree(@RequestParam("floor") int floor){
-        return treeHelper.getTree(floor);
+        return TreeHelper.getTree(treeMapper,floor);
     }
 }
