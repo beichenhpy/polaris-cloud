@@ -1,8 +1,4 @@
-server:
-  port: 23338
 spring:
-  application:
-    name: provider
   servlet:
     multipart:
       max-file-size: 10MB

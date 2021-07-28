@@ -1,8 +1,4 @@
-server:
-  port: 23331
 spring:
-  application:
-    name: consumer
   servlet:
     multipart:
       max-file-size: 10MB
@@ -79,3 +75,6 @@ logging:
   level:
     # log 1.配置好Configuration 2.yml中配置package: debug
     cn.beichenhpy.service.feign: debug
+
+job:
+  enabled: true
