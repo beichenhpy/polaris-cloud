@@ -23,12 +23,12 @@ public class Test1 {
     @Test
     public void test(){
         long start1 = System.currentTimeMillis();
-        List<TreeInfo> tree2 = treeHelper.getTree(3,false);
+        List<TreeInfo> tree2 = treeHelper.getTree(3);
         long end1 = System.currentTimeMillis() - start1;
         log.info("me:cost:{}",end1);
         log.info("result:me:{}",tree2);
         long start = System.currentTimeMillis();
-        List<TreeInfo> tree = treeHelper.getTree(3,true);
+        List<TreeInfo> tree = treeHelper.getTree(3);
         long end = System.currentTimeMillis() - start;
         log.info("me:cost:{}",end);
         log.info("result:me:{}",tree);

@@ -18,25 +18,36 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  * @apiNote M mapper T 为Tree的子类 用于查询树状层级结构
  * <br>重要：1. 数据库对应的parentId 和 id 需要为int类型 2. 层数为从上到下
+ * <br> 不足：需要手动配置bean，不然统一配置会无法注入泛型
  * @see Tree 树数据结构
  * @since 2021/7/24 12:53
  */
 public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
+
     @Autowired
     M mapper;
+
     //为内存计算使用，查询出来的所有树信息,线程安全
-    private List<T> allRows;
-    //每次查询都会更新 数据库方法
-    private List<T> noCacheAllRows;
-    //当前对应的层数
-    private Integer currentFloorNum;
-    private boolean isInitial = false;
+    private volatile List<T> allRows;
+
+    /**
+     * 双检锁赋值
+     */
+    public void init(){
+        if (allRows == null) {
+            synchronized (TreeHelper.class) {
+                if (allRows == null) {
+                    allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
+                }
+            }
+        }
+    }
 
     /**
      * 通过api新增层级时调用，刷新成员变量AllRows
      */
     public void updateCache() {
-        allRows = new CopyOnWriteArrayList<>(mapper.selectList(null));
+        init();
     }
 
     /**
@@ -47,59 +58,28 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
      */
     public List<T> getTree(Integer floor) {
         int parentId = floor - 1;
-        //加载一次,缓存机制
-        if (!isInitial) {
-            updateCache();
-            isInitial = true;
-        }
+        init();
         //重置当前层数
-        currentFloorNum = parentId;
-        return getChildren(parentId, true);
+        return getChildren(parentId);
     }
 
-    /**
-     * 缺省的方法查询树形结构 默认使用一次加载到内存
-     *
-     * @param floor           层数 从上到下
-     * @param isOneTimeMemory 是否一次性加载到内存
-     * @return 返回树形结构
-     */
-    public List<T> getTree(Integer floor, boolean isOneTimeMemory) {
-        int parentId = floor - 1;
-        //加载一次，缓存机制
-        if (isOneTimeMemory) {
-            return getTree(floor);
-        }
-        //重置当前层数
-        currentFloorNum = parentId;
-        noCacheAllRows = mapper.selectList(new QueryWrapper<T>().ge(SqlConstant.PARENT_ID.getValue(), parentId));
-        return getChildren(parentId, false);
-    }
 
     /**
-     * @param isOneTimeMemory 是否为一次性加载到内存
      * @param parentId        负极目录id
      * @return 整个树
      */
-    private List<T> getChildren(Integer parentId, boolean isOneTimeMemory) {
+    private List<T> getChildren(Integer parentId) {
         List<T> trees;
-        if (!isOneTimeMemory) {
-            trees = noCacheAllRows.stream()
-                    .filter(t -> parentId.equals(t.getParentId()))
-                    .collect(Collectors.toList());
-        } else {
-            trees = allRows.stream()
-                    .filter(t -> parentId.equals(t.getParentId()))
-                    .collect(Collectors.toList());
-        }
+        int floor = parentId;
+        trees = allRows.stream()
+                .filter(t -> parentId.equals(t.getParentId()))
+                .collect(Collectors.toList());
         if (!trees.isEmpty()) {
-            currentFloorNum++;
-            //bugfix 由于递归深入会改变成员变量，所以要新建中间临时变量存储当前的层数
-            int tempFloor = currentFloorNum;
+            floor++;
             for (T tree : trees) {
-                tree.setCurrentFloorNum(tempFloor);
+                tree.setCurrentFloorNum(floor);
                 //递归查询，直到return null结束
-                tree.setChildren(getChildren(tree.getId(), isOneTimeMemory));
+                tree.setChildren(getChildren(tree.getId()));
             }
             return trees;
         }
