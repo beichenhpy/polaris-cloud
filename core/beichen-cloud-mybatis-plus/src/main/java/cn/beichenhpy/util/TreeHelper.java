@@ -109,4 +109,49 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
         @TableField(exist = false)
         private List<? extends TreeHelper.Tree> children;
     }
+
+    /**
+     * 无缓存方式
+     */
+    public static class TreeHelperNoCache {
+
+        /**
+         * 缺省的方法查询树形结构 默认使用一次加载到内存
+         *
+         * @param floor 层数 从上到下
+         * @return 返回树形结构
+         */
+        public static <T extends TreeHelper.Tree, M extends BaseMapper<T>> List<T> getTree(Integer floor, M mapper) {
+            if (floor <= 0) {
+                throw new IllegalArgumentException("floor must > 0");
+            }
+            int parentId = floor - 1;
+            //重置当前层数
+            return getChildren(parentId, mapper.selectList(new QueryWrapper<T>().ge("parent_id", parentId)));
+        }
+
+
+        /**
+         * @param parentId 父极目录id
+         * @return 整个树
+         */
+        private static <T extends TreeHelper.Tree> List<T> getChildren(Integer parentId, List<T> rows) {
+            List<T> trees;
+            int floor = parentId;
+            trees = rows.stream()
+                    .filter(t -> parentId.equals(t.getParentId()))
+                    .collect(Collectors.toList());
+            if (!trees.isEmpty()) {
+                floor++;
+                for (T tree : trees) {
+                    tree.setCurrentFloorNum(floor);
+                    //递归查询，直到return null结束
+                    tree.setChildren(getChildren(tree.getId(), rows));
+                }
+                return trees;
+            }
+            //未查询到结束递归
+            return null;
+        }
+    }
 }

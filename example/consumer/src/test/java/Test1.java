@@ -22,6 +22,8 @@ import java.util.List;
 public class Test1 {
     @Autowired
     TreeHelper<TreeInfo,TreeMapper> treeHelper;
+    @Autowired
+    TreeMapper treeMapper;
     @Resource
     private JobProperties jobProperties;
     @Test
@@ -40,5 +42,11 @@ public class Test1 {
     @Test
     public void test2(){
         assert jobProperties.isEnabled();
+    }
+
+    @Test
+    public void test3(){
+        List<TreeInfo> tree = TreeHelper.TreeHelperNoCache.getTree(1, treeMapper);
+        log.info("{}",tree);
     }
 }
