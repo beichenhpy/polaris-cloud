@@ -33,7 +33,7 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
     /**
      * 双检锁赋值
      */
-    public void init(){
+    public void init() {
         if (allRows == null) {
             synchronized (TreeHelper.class) {
                 if (allRows == null) {
@@ -65,7 +65,7 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
 
 
     /**
-     * @param parentId        负极目录id
+     * @param parentId 父极目录id
      * @return 整个树
      */
     private List<T> getChildren(Integer parentId) {
