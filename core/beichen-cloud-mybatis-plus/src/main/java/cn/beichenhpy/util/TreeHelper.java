@@ -130,7 +130,7 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
             }
             int parentId = floor - 1;
             //重置当前层数
-            return getChildren(parentId, mapper.selectList(new QueryWrapper<T>().ge("parent_id", parentId)));
+            return getChildren(parentId, mapper.selectList(new QueryWrapper<T>().ge(SqlConstant.PARENT_ID.getValue(), parentId)));
         }
 
 
