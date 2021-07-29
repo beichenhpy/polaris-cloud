@@ -57,6 +57,9 @@ public class TreeHelper<T extends TreeHelper.Tree, M extends BaseMapper<T>> {
      * @return 返回树形结构
      */
     public List<T> getTree(Integer floor) {
+        if (floor <= 0) {
+            throw new IllegalArgumentException("floor must > 0");
+        }
         int parentId = floor - 1;
         init();
         //重置当前层数
