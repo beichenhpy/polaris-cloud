@@ -19,12 +19,6 @@ spring:
         locator:
           enabled: true
       routes:
-      - id: FILE
-        uri: lb://files
-        predicates:
-          - Path=/files/**
-        filters:
-          - StripPrefix=1
       - id: CONSUMER
         uri: lb://consumer
         predicates:
@@ -37,3 +31,7 @@ spring:
           - Path=/provider/**
         filters:
           - StripPrefix=1
+      - id: XXL-JOB
+        uri: lb://xxl-job-admin
+        predicates:
+          - Path=/**

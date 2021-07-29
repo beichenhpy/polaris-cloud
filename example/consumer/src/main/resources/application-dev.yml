@@ -78,3 +78,10 @@ logging:
 
 job:
   enabled: true
+  admin-addresses: http://127.0.0.1:23335/xxl-job-admin
+  executor:
+    app-name: consumer
+    ip:
+    port: 21000
+    log-path: logs/xxl-job/jobhandler
+    log-retention-days: 30

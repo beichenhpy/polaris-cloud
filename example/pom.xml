@@ -37,10 +37,6 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-        <dependency>
             <groupId>cn.beichenhpy</groupId>
             <artifactId>beichen-cloud-mybatis-plus</artifactId>
         </dependency>

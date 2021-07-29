@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: xxl-job-admin
+  cloud:
+    nacos:
+      config:
+        # dataId:${prefix}-${spring.profiles.active}.${file-extension}
+        server-addr: localhost:8848
+      discovery:
+        server-addr: 127.0.0.1:8848
+        enabled: true
+        #beichen-dev
+        namespace: fcb46db4-0c13-4f69-85d4-d23bacdffd7a
