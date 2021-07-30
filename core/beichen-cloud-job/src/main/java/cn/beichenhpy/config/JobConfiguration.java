@@ -25,7 +25,7 @@ import javax.annotation.Resource;
 public class JobConfiguration {
     private final JobProperties jobProperties;
 
-    @Bean(initMethod = "start", destroyMethod = "destroy")
+    @Bean
     @ConditionalOnProperty(prefix = JobProperties.PREFIX, value = "enabled", havingValue = "true")
     public XxlJobSpringExecutor xxlJobExecutor() {
         XxlJobSpringExecutor xxlJobExecutor = new XxlJobSpringExecutor();
