@@ -1,6 +1,6 @@
 spring:
   application:
-    name: xxl-job-admin
+    name: xxl-job-admin-server
   cloud:
     nacos:
       config:

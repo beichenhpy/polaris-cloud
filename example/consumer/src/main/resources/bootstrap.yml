@@ -1,8 +1,10 @@
 server:
   port: 23331
+  servlet:
+    context-path: /consumer
 spring:
   application:
-    name: consumer
+    name: consumer-server
   profiles:
     active: dev
   cloud:

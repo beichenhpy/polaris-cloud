@@ -1,8 +1,10 @@
 server:
   port: 23338
+  servlet:
+    context-path: /provider
 spring:
   application:
-    name: provider
+    name: provider-server
   profiles:
     active: dev
   cloud:

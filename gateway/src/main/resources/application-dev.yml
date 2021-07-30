@@ -19,19 +19,16 @@ spring:
         locator:
           enabled: true
       routes:
+      # 备注 uri 一定不能和predicates的Path一样，不然有问题
       - id: CONSUMER
-        uri: lb://consumer
+        uri: lb://consumer-server
         predicates:
           - Path=/consumer/**
-        filters:
-          - StripPrefix=1
       - id: PROVIDER
-        uri: lb://provider
+        uri: lb://provider-server
         predicates:
           - Path=/provider/**
-        filters:
-          - StripPrefix=1
       - id: XXL-JOB
-        uri: lb://xxl-job-admin
+        uri: lb://xxl-job-admin-server
         predicates:
-          - Path=/**
+          - Path=/xxl-job-admin/**
