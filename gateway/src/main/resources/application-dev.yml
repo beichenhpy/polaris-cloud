@@ -32,3 +32,7 @@ spring:
         uri: lb://xxl-job-admin-server
         predicates:
           - Path=/xxl-job-admin/**
+      - id: WEBSOCKET
+        uri: lb:ws://websocket-server
+        predicates:
+          - Path=/socket-center/**

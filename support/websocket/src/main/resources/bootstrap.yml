@@ -1,0 +1,14 @@
+server:
+  port: 24443
+  servlet:
+    context-path: /socket-center
+spring:
+  application:
+    name: websocket-server
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        # dataId:${prefix}-${spring.profiles.active}.${file-extension}
+        server-addr: localhost:8848
