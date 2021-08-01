@@ -6,12 +6,12 @@ import lombok.Getter;
 /**
  * @author beichenhpy
  * @version 1.0.0
- * @apiNote 消息类型
+ * @apiNote 发送类型
  * @since 2021/8/1 09:45
  */
 @AllArgsConstructor
 @Getter
-public enum MessageType {
+public enum SendToType {
     SINGLE(0,"single"),
     GROUP(1,"group"),
     ALL(-1,"all");

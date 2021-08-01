@@ -1,7 +1,11 @@
 package cn.beichenhpy.websocket;
 
 import cn.beichenhpy.websocket.modal.Message;
-import cn.beichenhpy.websocket.modal.MessageType;
+import cn.beichenhpy.websocket.modal.body.ChatMessage;
+import cn.beichenhpy.websocket.modal.body.NoticeMessage;
+import cn.beichenhpy.websocket.service.impl.ChatService;
+import cn.beichenhpy.websocket.service.IMessageService;
+import cn.beichenhpy.websocket.service.impl.NoticeService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,7 +17,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.stream.Collectors;
 
 /**
  * @author beichenhpy
@@ -23,7 +26,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-@ServerEndpoint(value = "/chat/{userId}")
+@ServerEndpoint(value = "/{userId}")
 public class WebSocketServer {
 
     private static final Map<String, Session> ONLINE_USERS = new ConcurrentHashMap<>();
@@ -49,8 +52,21 @@ public class WebSocketServer {
     @OnMessage
     public void onMessage(@PathParam("userId") String userId, String data) throws IOException {
         log.info("user:{},data:{}", userId, data);
+        //parse to Message
         Message message = JSON.parseObject(data, Message.class);
-        sendMessage(message);
+        //根据消息头类型不同，进行筛选
+        switch (message.getHeader()) {
+            case CHAT:
+                chat(JSON.parseObject(message.getBody(), ChatMessage.class));
+                break;
+            case NOTICE:
+                notice(JSON.parseObject(data, NoticeMessage.class));
+                break;
+            case HEARTBEAT:
+                heartbeat();
+                break;
+            default:
+        }
     }
 
 
@@ -59,6 +75,37 @@ public class WebSocketServer {
         log.info("[ChatServer] close : userid = " + userid + " , sessionId = " + session.getId() + " , throwable = " + throwable.getMessage());
     }
 
+    /**
+     * 聊天
+     * @param chatMessage 聊天信息
+     * @throws IOException 异常
+     */
+    public void chat(ChatMessage chatMessage) throws IOException{
+        //do sendMessage
+        IMessageService<ChatMessage> chatService = new ChatService();
+        chatService.sendMessage(chatMessage,this);
+    }
+
+
+    /**
+     * 通知
+     * @param noticeMessage 通知信息
+     * @throws IOException 异常
+     */
+    public void notice(NoticeMessage noticeMessage) throws IOException {
+        //do sendMessage
+        IMessageService<NoticeMessage> noticeService = new NoticeService();
+        noticeService.sendMessage(noticeMessage,this);
+    }
+
+    /**
+     * 心跳
+     * @throws IOException 异常
+     */
+    public void heartbeat() throws IOException{
+        //todo design
+        log.info("heartbeat");
+    }
     /**
      * 添加在线人数
      *
@@ -74,38 +121,12 @@ public class WebSocketServer {
         }
     }
 
-    /**
-     * 根据消息类型发送消息
-     * @param message 消息
-     * @throws IOException 异常
-     */
-    public void sendMessage(Message message) throws IOException {
-        //防止枚举不识别
-        switch (message.getType()) {
-            case SINGLE:
-                sendToUser(message.getTo(), message.getText());
-                break;
-            case ALL:
-                sendAll(message.getText());
-                break;
-            case GROUP:
-                //将用户加入群组
-                joinGroup(message.getTo(),message.getFrom());
-                //群发
-                Set<String> groupMembers = getGroupMembers(message.getTo());
-                for (String groupMember : groupMembers) {
-                    sendToUser(groupMember,message.getText());
-                }
-                break;
-            default:
-        }
-    }
 
     /**
      * 发送给某个用户
      *
      * @param userId 用户
-     * @param text    消息
+     * @param text   消息
      * @throws IOException io异常
      */
     public void sendToUser(String userId, String text) throws IOException {
@@ -127,10 +148,11 @@ public class WebSocketServer {
 
     /**
      * 加群
+     *
      * @param groupId 群组名
-     * @param userId 用户名
+     * @param userId  用户名
      */
-    public void joinGroup(String groupId,String userId){
+    public void joinGroup(String groupId, String userId) {
         //判断是否有key
         if (GROUPS.containsKey(groupId)) {
             Set<Map.Entry<String, Set<String>>> groups = GROUPS.entrySet();
@@ -138,7 +160,7 @@ public class WebSocketServer {
                 Set<String> users = group.getValue();
                 users.add(userId);
             }
-        }else {
+        } else {
             Set<String> users = new CopyOnWriteArraySet<>();
             users.add(userId);
             GROUPS.put(groupId, users);
@@ -147,10 +169,11 @@ public class WebSocketServer {
 
     /**
      * 获取群员
+     *
      * @param groupId 群id
      * @return 用户ids
      */
-    public Set<String> getGroupMembers(String groupId){
+    public Set<String> getGroupMembers(String groupId) {
         return GROUPS.get(groupId);
     }
 }
