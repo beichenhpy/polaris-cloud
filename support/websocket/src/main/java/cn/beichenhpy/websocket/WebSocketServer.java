@@ -5,22 +5,20 @@ import cn.beichenhpy.websocket.modal.Message;
 import cn.beichenhpy.websocket.modal.body.ChatMessage;
 import cn.beichenhpy.websocket.modal.body.HeartBeatMessage;
 import cn.beichenhpy.websocket.modal.body.NoticeMessage;
-import cn.beichenhpy.websocket.service.impl.ChatService;
 import cn.beichenhpy.websocket.service.IMessageService;
+import cn.beichenhpy.websocket.service.impl.ChatService;
 import cn.beichenhpy.websocket.service.impl.HeartBeatService;
 import cn.beichenhpy.websocket.service.impl.NoticeService;
 import com.alibaba.fastjson.JSON;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
