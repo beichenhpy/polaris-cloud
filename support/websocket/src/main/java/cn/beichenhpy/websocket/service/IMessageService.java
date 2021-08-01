@@ -2,6 +2,7 @@ package cn.beichenhpy.websocket.service;
 
 import cn.beichenhpy.websocket.WebSocketServer;
 import cn.beichenhpy.websocket.modal.body.BaseMessage;
+import cn.beichenhpy.websocket.modal.show.ShowMessage;
 import com.alibaba.fastjson.JSON;
 
 import java.io.IOException;
@@ -28,6 +29,12 @@ public interface IMessageService<T extends BaseMessage> {
      * @return 返回展示的消息
      */
     default String assemble(T message) {
-        return JSON.toJSONString(new BaseMessage.ShowMessage(message.getFrom(),message.getContent(),LocalDateTime.now()));
+        return JSON.toJSONString(
+                new ShowMessage(
+                        message.getFrom(),
+                        message.getContent(),
+                        LocalDateTime.now()
+                )
+        );
     }
 }

@@ -61,7 +61,7 @@ public class WebSocketServer {
                 chat(JSON.parseObject(message.getBody(), ChatMessage.class));
                 break;
             case NOTICE:
-                notice(JSON.parseObject(data, NoticeMessage.class));
+                notice(JSON.parseObject(message.getBody(), NoticeMessage.class));
                 break;
             case HEARTBEAT:
                 heartbeat();

@@ -1,8 +1,10 @@
 package cn.beichenhpy.websocket.modal.body;
 
 import cn.beichenhpy.websocket.modal.NoticeLevel;
+import cn.beichenhpy.websocket.modal.SendToType;
+import cn.beichenhpy.websocket.modal.show.ShowMessage;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -15,18 +17,16 @@ import java.time.LocalDateTime;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class NoticeMessage extends BaseMessage{
     /**
      * 通知等级 LOW/MIDDLE/HIGH
      */
     private NoticeLevel level;
 
-
-    @ToString(callSuper = true)
-    @EqualsAndHashCode(callSuper = true)
-    @Data
-    @Accessors(chain = true)
-    public static class NoticeShowMessage extends BaseMessage.ShowMessage {
-        private NoticeLevel level;
+    public NoticeMessage(String from, String content, String to, SendToType type, NoticeLevel level) {
+        super(from, content, to, type);
+        this.level = level;
     }
 }

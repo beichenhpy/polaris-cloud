@@ -1,7 +1,9 @@
 package cn.beichenhpy.websocket.service.impl;
 
 import cn.beichenhpy.websocket.WebSocketServer;
+import cn.beichenhpy.websocket.modal.NoticeLevel;
 import cn.beichenhpy.websocket.modal.body.NoticeMessage;
+import cn.beichenhpy.websocket.modal.show.NoticeShowMessage;
 import cn.beichenhpy.websocket.service.IMessageService;
 import com.alibaba.fastjson.JSON;
 
@@ -41,11 +43,12 @@ public class NoticeService implements IMessageService<NoticeMessage> {
     @Override
     public String assemble(NoticeMessage message) {
         return JSON.toJSONString(
-                new NoticeMessage.NoticeShowMessage()
-                .setLevel(message.getLevel())
-                .setFrom(message.getFrom())
-                .setContent(message.getContent())
-                .setTimestamp(LocalDateTime.now())
+                new NoticeShowMessage(
+                        message.getFrom(),
+                        message.getContent(),
+                        LocalDateTime.now(),
+                        message.getLevel()
+                )
         );
     }
 }

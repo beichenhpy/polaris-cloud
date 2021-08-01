@@ -1,9 +1,8 @@
 package cn.beichenhpy.websocket.modal.body;
 
 import cn.beichenhpy.websocket.modal.SendToType;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @author beichenhpy
@@ -14,6 +13,10 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
 public class ChatMessage extends BaseMessage{
+    public ChatMessage(String from, String content, String to, SendToType type) {
+        super(from, content, to, type);
+    }
     //according biz to add more
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +16,8 @@ import java.time.LocalDateTime;
  * @since 2021/8/1 18:14
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseMessage {
 
     /**
@@ -36,26 +39,4 @@ public class BaseMessage {
      */
     private SendToType type;
 
-
-    /**
-     * 展示给前端的信息
-     */
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Accessors(chain = true)
-    public static class ShowMessage{
-        /**
-         * 发送者
-         */
-        private String from;
-        /**
-         * 内容
-         */
-        private String content;
-        /**
-         * 时间戳
-         */
-        private LocalDateTime timestamp;
-    }
 }
