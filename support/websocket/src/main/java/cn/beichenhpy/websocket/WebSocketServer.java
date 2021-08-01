@@ -2,6 +2,7 @@ package cn.beichenhpy.websocket;
 
 import cn.beichenhpy.exception.user.UserNotFoundException;
 import cn.beichenhpy.websocket.modal.Message;
+import cn.beichenhpy.websocket.modal.body.BaseMessage;
 import cn.beichenhpy.websocket.modal.body.ChatMessage;
 import cn.beichenhpy.websocket.modal.body.HeartBeatMessage;
 import cn.beichenhpy.websocket.modal.body.NoticeMessage;
@@ -32,6 +33,10 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Component
 @ServerEndpoint(value = "/{userId}")
 public class WebSocketServer {
+
+    private volatile ChatService chatService;
+    private volatile NoticeService noticeService;
+    private volatile HeartBeatService heartBeatService;
 
     private static final Map<String, Session> ONLINE_USERS = new ConcurrentHashMap<>();
     private static Integer onlineCount = 0;
@@ -87,7 +92,14 @@ public class WebSocketServer {
      */
     public void chat(ChatMessage chatMessage) throws IOException {
         //do sendMessage
-        IMessageService<ChatMessage> chatService = new ChatService();
+        if (chatService == null) {
+            synchronized (WebSocketServer.class) {
+                if (chatService == null) {
+                    chatService = new ChatService();
+                }
+            }
+        }
+        log.info("user:{},chatService:{}",chatMessage.getFrom(),chatService);
         chatService.sendMessage(chatMessage, this);
     }
 
@@ -100,7 +112,14 @@ public class WebSocketServer {
      */
     public void notice(NoticeMessage noticeMessage) throws IOException {
         //do sendMessage
-        IMessageService<NoticeMessage> noticeService = new NoticeService();
+        if (noticeService == null) {
+            synchronized (WebSocketServer.class) {
+                if (noticeService == null) {
+                    noticeService = new NoticeService();
+                }
+            }
+        }
+        log.info("user:{},noticeService:{}",noticeMessage.getFrom(),noticeService);
         noticeService.sendMessage(noticeMessage, this);
     }
 
@@ -110,7 +129,14 @@ public class WebSocketServer {
      * @throws IOException 异常
      */
     public void heartbeat(HeartBeatMessage heartBeatMessage) throws IOException {
-        IMessageService<HeartBeatMessage> heartBeatService = new HeartBeatService();
+        if (heartBeatService == null) {
+            synchronized (WebSocketServer.class) {
+                if (heartBeatService == null) {
+                    heartBeatService = new HeartBeatService();
+                }
+            }
+        }
+        log.info("user:{},heartService:{}",heartBeatMessage.getFrom(),heartBeatService);
         heartBeatService.sendMessage(heartBeatMessage, this);
     }
 

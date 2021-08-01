@@ -18,6 +18,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class HeartBeatMessage extends BaseMessage{
     public HeartBeatMessage(String from, String content, String to, SendToType type) {
-        super(from, content, "server", SendToType.SINGLE);
+        super(from, content, to,type);
     }
 }
