@@ -2,11 +2,8 @@ package cn.beichenhpy.websocket.modal.body;
 
 import cn.beichenhpy.websocket.modal.NoticeLevel;
 import cn.beichenhpy.websocket.modal.SendToType;
-import cn.beichenhpy.websocket.modal.show.ShowMessage;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
 
 /**
  * @author beichenhpy

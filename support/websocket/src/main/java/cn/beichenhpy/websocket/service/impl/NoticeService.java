@@ -1,7 +1,6 @@
 package cn.beichenhpy.websocket.service.impl;
 
 import cn.beichenhpy.websocket.WebSocketServer;
-import cn.beichenhpy.websocket.modal.NoticeLevel;
 import cn.beichenhpy.websocket.modal.body.NoticeMessage;
 import cn.beichenhpy.websocket.modal.show.NoticeShowMessage;
 import cn.beichenhpy.websocket.service.IMessageService;

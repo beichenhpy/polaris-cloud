@@ -2,7 +2,6 @@ package cn.beichenhpy.websocket.modal.body;
 
 import cn.beichenhpy.websocket.modal.SendToType;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 /**
  * @author beichenhpy

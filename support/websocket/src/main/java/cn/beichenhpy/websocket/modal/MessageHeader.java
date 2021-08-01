@@ -1,6 +1,5 @@
 package cn.beichenhpy.websocket.modal;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
