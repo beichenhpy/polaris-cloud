@@ -1,5 +1,6 @@
 package cn.beichenhpy.websocket;
 
+import cn.beichenhpy.exception.user.UserNotFoundException;
 import cn.beichenhpy.websocket.modal.Message;
 import cn.beichenhpy.websocket.modal.body.ChatMessage;
 import cn.beichenhpy.websocket.modal.body.NoticeMessage;
@@ -130,7 +131,12 @@ public class WebSocketServer {
      * @throws IOException io异常
      */
     public void sendToUser(String userId, String text) throws IOException {
-        ONLINE_USERS.get(userId).getBasicRemote().sendText(text);
+        //fix:userId不存在的NollPointer
+        if (ONLINE_USERS.containsKey(userId)){
+            ONLINE_USERS.get(userId).getBasicRemote().sendText(text);
+        }else {
+            throw new UserNotFoundException("发送消息的对象不存在");
+        }
     }
 
     /**
