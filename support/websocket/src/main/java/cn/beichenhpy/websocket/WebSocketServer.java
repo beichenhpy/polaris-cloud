@@ -3,14 +3,19 @@ package cn.beichenhpy.websocket;
 import cn.beichenhpy.exception.user.UserNotFoundException;
 import cn.beichenhpy.websocket.modal.Message;
 import cn.beichenhpy.websocket.modal.body.ChatMessage;
+import cn.beichenhpy.websocket.modal.body.HeartBeatMessage;
 import cn.beichenhpy.websocket.modal.body.NoticeMessage;
 import cn.beichenhpy.websocket.service.impl.ChatService;
 import cn.beichenhpy.websocket.service.IMessageService;
+import cn.beichenhpy.websocket.service.impl.HeartBeatService;
 import cn.beichenhpy.websocket.service.impl.NoticeService;
 import com.alibaba.fastjson.JSON;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -64,7 +69,7 @@ public class WebSocketServer {
                 notice(JSON.parseObject(message.getBody(), NoticeMessage.class));
                 break;
             case HEARTBEAT:
-                heartbeat();
+                heartbeat(JSON.parseObject(message.getBody(), HeartBeatMessage.class));
                 break;
             default:
         }
@@ -78,35 +83,39 @@ public class WebSocketServer {
 
     /**
      * 聊天
+     *
      * @param chatMessage 聊天信息
      * @throws IOException 异常
      */
-    public void chat(ChatMessage chatMessage) throws IOException{
+    public void chat(ChatMessage chatMessage) throws IOException {
         //do sendMessage
         IMessageService<ChatMessage> chatService = new ChatService();
-        chatService.sendMessage(chatMessage,this);
+        chatService.sendMessage(chatMessage, this);
     }
 
 
     /**
      * 通知
+     *
      * @param noticeMessage 通知信息
      * @throws IOException 异常
      */
     public void notice(NoticeMessage noticeMessage) throws IOException {
         //do sendMessage
         IMessageService<NoticeMessage> noticeService = new NoticeService();
-        noticeService.sendMessage(noticeMessage,this);
+        noticeService.sendMessage(noticeMessage, this);
     }
 
     /**
      * 心跳
+     *
      * @throws IOException 异常
      */
-    public void heartbeat() throws IOException{
-        //todo design
-        log.info("heartbeat");
+    public void heartbeat(HeartBeatMessage heartBeatMessage) throws IOException {
+        IMessageService<HeartBeatMessage> heartBeatService = new HeartBeatService();
+        heartBeatService.sendMessage(heartBeatMessage, this);
     }
+
     /**
      * 添加在线人数
      *
@@ -132,9 +141,9 @@ public class WebSocketServer {
      */
     public void sendToUser(String userId, String text) throws IOException {
         //fix:userId不存在的NollPointer
-        if (ONLINE_USERS.containsKey(userId)){
+        if (ONLINE_USERS.containsKey(userId)) {
             ONLINE_USERS.get(userId).getBasicRemote().sendText(text);
-        }else {
+        } else {
             throw new UserNotFoundException("发送消息的对象不存在");
         }
     }

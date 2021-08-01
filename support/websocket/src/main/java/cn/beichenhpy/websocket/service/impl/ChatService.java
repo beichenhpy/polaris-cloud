@@ -3,6 +3,7 @@ package cn.beichenhpy.websocket.service.impl;
 import cn.beichenhpy.websocket.WebSocketServer;
 import cn.beichenhpy.websocket.modal.body.ChatMessage;
 import cn.beichenhpy.websocket.service.IMessageService;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Set;
