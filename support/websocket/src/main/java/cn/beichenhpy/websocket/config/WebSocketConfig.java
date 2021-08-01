@@ -1,4 +1,4 @@
-package cn.beichenhpy.websocket;
+package cn.beichenhpy.websocket.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
  * @since 2021/7/31 15:37
  */
 @Configuration
-public class config {
+public class WebSocketConfig {
     @Bean
     public ServerEndpointExporter serverEndpointExporter(){
         return new ServerEndpointExporter();
