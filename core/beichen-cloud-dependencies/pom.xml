@@ -27,7 +27,7 @@
         <hutool.version>5.5.8</hutool.version>
         <lombok.version>1.18.12</lombok.version>
         <xxl-job.version>2.3.0</xxl-job.version>
-
+        <fastjson.version>1.2.76</fastjson.version>
         <beichen.version>1.0.0</beichen.version>
         <!--Plugin-->
         <maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
@@ -110,6 +110,11 @@
                 <groupId>com.xuxueli</groupId>
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl-job.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
             <!--beichen-cloud-dependence-->
             <dependency>
