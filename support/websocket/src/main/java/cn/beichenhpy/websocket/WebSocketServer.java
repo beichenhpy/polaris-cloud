@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @ServerEndpoint(value = "/chat/{userId}")
-public class Server {
+public class WebSocketServer {
 
     private static final Map<String, Session> ONLINE_USERS = new ConcurrentHashMap<>();
     private static Integer onlineCount = 0;
