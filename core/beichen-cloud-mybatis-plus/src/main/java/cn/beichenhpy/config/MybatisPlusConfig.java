@@ -1,6 +1,7 @@
 package cn.beichenhpy.config;
 
 import cn.beichenhpy.handler.FiledInjectHandler;
+import cn.beichenhpy.handler.MysqlInject;
 import cn.beichenhpy.util.TreeHelper;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -28,6 +29,11 @@ public class MybatisPlusConfig {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
+    }
+
+    @Bean
+    public MysqlInject sqlInject(){
+        return new MysqlInject();
     }
 
 }
