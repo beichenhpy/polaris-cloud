@@ -31,6 +31,10 @@ public class MybatisPlusConfig {
         return interceptor;
     }
 
+    /**
+     * Mysql的对于mapper的增强
+     * @return 返回bean
+     */
     @Bean
     public MysqlInject sqlInject(){
         return new MysqlInject();

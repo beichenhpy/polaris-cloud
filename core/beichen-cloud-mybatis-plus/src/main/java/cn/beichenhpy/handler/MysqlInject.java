@@ -17,7 +17,8 @@ public class MysqlInject extends DefaultSqlInjector {
     @Override
     public List<AbstractMethod> getMethodList(Class<?> mapperClass) {
         List<AbstractMethod> methodList = super.getMethodList(mapperClass);
-        methodList.add(new InsertBatchSomeColumn());
+        //不插入逻辑删除的字段
+        methodList.add(new InsertBatchSomeColumn(tableFieldInfo -> !tableFieldInfo.isLogicDelete()));
         methodList.add(new AlwaysUpdateSomeColumnById());
         return methodList;
     }
