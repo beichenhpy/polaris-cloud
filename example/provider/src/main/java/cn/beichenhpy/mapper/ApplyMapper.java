@@ -1,7 +1,6 @@
 package cn.beichenhpy.mapper;
 
 import cn.beichenhpy.modal.Apply;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
