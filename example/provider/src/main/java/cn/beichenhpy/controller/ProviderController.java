@@ -1,6 +1,7 @@
 package cn.beichenhpy.controller;
 
 import cn.beichenhpy.modal.Comment;
+import cn.beichenhpy.service.ApplyService;
 import cn.beichenhpy.service.ProviderService;
 import cn.beichenhpy.utils.asserts.AssertToolkit;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -19,6 +20,7 @@ import java.util.List;
 public class ProviderController {
 
     private final ProviderService providerService;
+    private final ApplyService applyService;
 
     @GetMapping("/info/{aid}")
     public ResponseEntity<List<Comment>> getCommentInfoByArticleId(@PathVariable("aid") String aid) {
@@ -39,5 +41,10 @@ public class ProviderController {
                 .ok()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
+    }
+
+    @GetMapping("/test")
+    public void test(){
+        applyService.importData();
     }
 }
