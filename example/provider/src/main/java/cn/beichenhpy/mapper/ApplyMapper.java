@@ -11,5 +11,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021/8/2 20:00
  */
 @Mapper
-public interface ApplyMapper extends BaseMapper<Apply> {
+public interface ApplyMapper extends ExtentMapper<Apply> {
 }
