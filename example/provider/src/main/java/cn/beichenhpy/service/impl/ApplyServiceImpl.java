@@ -64,14 +64,18 @@ public class ApplyServiceImpl extends ServiceImpl<ApplyMapper, Apply> implements
         Map<String, Apply> index = new HashMap<>();
         for (Apply existData : existDatas) {
             //用apply_type-vid 作为key 去唯一索引
-            index.put(existData.getApplyType() + "-" + existData.getVid(), existData);
+            index.put(assemble(existData.getApplyType(),existData.getVid()), existData);
         }
         for (Apply importData : importDatas) {
-            Apply existData = index.get(importData.getApplyType() + "-" + importData.getVid());
+            Apply existData = index.get(assemble(importData.getApplyType(),importData.getVid()));
             if (existData != null) {
                 importData.setId(existData.getId());
             }
         }
         saveOrUpdateBatch(importDatas);
+    }
+
+    private String assemble(String applyType ,String vid){
+        return applyType + "-" + vid;
     }
 }
