@@ -1,0 +1,15 @@
+server:
+  port: 23336
+  servlet:
+    context-path: /redis
+spring:
+  application:
+    name: redis-demo
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        # dataId:${prefix}-${spring.profiles.active}.${file-extension}
+        server-addr: localhost:8848
+        file-extension: yml
