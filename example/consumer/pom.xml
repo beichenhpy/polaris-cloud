@@ -20,5 +20,9 @@
             <groupId>cn.beichenhpy</groupId>
             <artifactId>beichen-cloud-job</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.beichenhpy</groupId>
+            <artifactId>beichen-cloud-mybatis-plus</artifactId>
+        </dependency>
     </dependencies>
 </project>
