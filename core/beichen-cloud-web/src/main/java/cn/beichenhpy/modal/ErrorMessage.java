@@ -1,4 +1,4 @@
-package cn.beichenhpy.exception.modal;
+package cn.beichenhpy.modal;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 public class ErrorMessage {
     private LocalDateTime timestamp;
     private HttpStatus status;
-    private int code;
+    private Integer code;
     private String message;
     private String path;
 }

@@ -1,17 +1,15 @@
 package cn.beichenhpy.exception.handler;
 
 import cn.beichenhpy.exception.feign.FeignResponseFailException;
-import cn.beichenhpy.exception.modal.ErrorMessage;
+import cn.beichenhpy.modal.ErrorMessage;
+import cn.beichenhpy.modal.R;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 
 /**
  * @author beichenhpy
@@ -25,16 +23,6 @@ public class FeignExceptionHandler {
     @ExceptionHandler(FeignResponseFailException.class)
     public ResponseEntity<ErrorMessage> FeignResponseFailExceptionHandler(HttpServletRequest request, FeignResponseFailException e) {
         log.error(e.getMessage());
-        return ResponseEntity
-                .status(HttpStatus.SERVICE_UNAVAILABLE)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .body(
-                        ErrorMessage.builder()
-                                .message(e.getMessage())
-                                .code(HttpStatus.SERVICE_UNAVAILABLE.value())
-                                .path(request.getServletPath())
-                                .timestamp(LocalDateTime.now())
-                                .status(HttpStatus.SERVICE_UNAVAILABLE).build()
-                );
+        return R.F(HttpStatus.SERVICE_UNAVAILABLE, request.getServletPath(), e.getMessage());
     }
 }

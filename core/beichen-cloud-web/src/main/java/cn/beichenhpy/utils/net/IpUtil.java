@@ -1,7 +1,6 @@
 package cn.beichenhpy.utils.net;
 
 import cn.hutool.core.util.ObjectUtil;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
