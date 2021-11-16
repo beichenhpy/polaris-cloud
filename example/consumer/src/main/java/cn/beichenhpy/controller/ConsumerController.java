@@ -4,6 +4,7 @@ import cn.beichenhpy.exception.file.FileNotUploadException;
 import cn.beichenhpy.mapper.TreeMapper;
 import cn.beichenhpy.modal.Article;
 import cn.beichenhpy.modal.Comment;
+import cn.beichenhpy.modal.R;
 import cn.beichenhpy.modal.TreeInfo;
 import cn.beichenhpy.service.ConsumerService;
 import cn.beichenhpy.service.feign.ProviderFeignService;
@@ -39,10 +40,7 @@ public class ConsumerController {
         AssertToolkit.feignResponseFail(response.getStatusCode().value(),"provider");
         Article article = consumerService.getById(aid);
         article.setComments(response.getBody());
-        return ResponseEntity
-                .ok()
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .body(article);
+        return R.S(article);
     }
 
     /**
