@@ -29,3 +29,9 @@ hs_err_pid*
 .DS_Store
 
 target/
+
+#vscode
+.project
+.classpath
+.settings
+.factorypath
