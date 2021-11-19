@@ -1,11 +1,12 @@
 package cn.beichenhpy.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import org.springframework.stereotype.Service;
+
 import cn.beichenhpy.mapper.ConsumerMapper;
 import cn.beichenhpy.modal.Article;
-import cn.beichenhpy.modal.Comment;
 import cn.beichenhpy.service.ConsumerService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * @author beichenhpy

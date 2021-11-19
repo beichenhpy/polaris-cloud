@@ -1,5 +1,17 @@
 package cn.beichenhpy.controller;
 
+import java.util.List;
+
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import cn.beichenhpy.exception.file.FileNotUploadException;
 import cn.beichenhpy.mapper.TreeMapper;
 import cn.beichenhpy.modal.Article;
@@ -10,15 +22,7 @@ import cn.beichenhpy.service.ConsumerService;
 import cn.beichenhpy.service.feign.ProviderFeignService;
 import cn.beichenhpy.util.TreeHelper;
 import cn.beichenhpy.utils.asserts.AssertToolkit;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @AllArgsConstructor
 @RestController

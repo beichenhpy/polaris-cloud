@@ -1,9 +1,8 @@
 package cn.beichenhpy.service;
 
-import cn.beichenhpy.modal.Apply;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.List;
+import cn.beichenhpy.modal.Apply;
 
 /**
  * @author beichenhpy

@@ -1,9 +1,10 @@
 package cn.beichenhpy.mapper;
 
-import cn.beichenhpy.modal.Article;
-import cn.beichenhpy.modal.Comment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import org.apache.ibatis.annotations.Mapper;
+
+import cn.beichenhpy.modal.Article;
 
 /**
  * @author beichenhpy

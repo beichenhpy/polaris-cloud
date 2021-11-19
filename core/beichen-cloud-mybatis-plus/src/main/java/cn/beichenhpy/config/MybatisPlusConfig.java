@@ -1,15 +1,16 @@
 package cn.beichenhpy.config;
 
-import cn.beichenhpy.handler.FiledInjectHandler;
-import cn.beichenhpy.handler.MysqlInject;
-import cn.beichenhpy.util.TreeHelper;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import cn.beichenhpy.handler.FiledInjectHandler;
+import cn.beichenhpy.handler.MysqlInject;
 
 /**
  * @author beichenhpy

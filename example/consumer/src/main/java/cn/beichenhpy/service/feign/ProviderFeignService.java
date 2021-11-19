@@ -1,14 +1,14 @@
 package cn.beichenhpy.service.feign;
 
-import cn.beichenhpy.modal.Comment;
-import cn.beichenhpy.service.feign.fallback.ProviderFeignServiceImpl;
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import cn.beichenhpy.modal.Comment;
+import cn.beichenhpy.service.feign.fallback.ProviderFeignServiceImpl;
 
 /**
  * @author beichenhpy

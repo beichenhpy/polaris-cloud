@@ -2,7 +2,6 @@ package cn.beichenhpy.exception.user;
 
 import cn.beichenhpy.exception.NoNeedRollback;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
