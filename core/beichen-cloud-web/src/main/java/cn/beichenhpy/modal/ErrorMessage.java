@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -17,8 +19,9 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class ErrorMessage {
+@SuperBuilder
+public class ErrorMessage implements Serializable {
+    private static final long serialVersionUID = -2033191967513013366L;
     private LocalDateTime timestamp;
     private HttpStatus status;
     private Integer code;

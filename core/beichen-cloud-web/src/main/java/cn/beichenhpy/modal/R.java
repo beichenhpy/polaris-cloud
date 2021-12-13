@@ -6,10 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class R {
+public class R implements Serializable {
+
+    private static final long serialVersionUID = -7646240998582769873L;
 
     /**
      * 初始化方法
@@ -49,17 +52,21 @@ public class R {
      * @return 返回返回值
      */
     public static ResponseEntity<ErrorMessage> F(HttpStatus status, String path, String message) {
-        return I(status, ErrorMessage.builder()
-                .timestamp(LocalDateTime.now())
-                .path(path)
-                .status(status)
-                .code(status.value())
-                .message(message).build());
+        return I(
+                status,
+                ErrorMessage.builder()
+                        .timestamp(LocalDateTime.now())
+                        .path(path)
+                        .status(status)
+                        .code(status.value())
+                        .message(message).build()
+        );
     }
 
     /**
      * 经常用的错误状态 500
-     * @param path 请求路径
+     *
+     * @param path    请求路径
      * @param message 原因
      * @return 返回值
      */
