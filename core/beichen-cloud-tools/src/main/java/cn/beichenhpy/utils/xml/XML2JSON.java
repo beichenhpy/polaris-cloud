@@ -98,6 +98,41 @@ public class XML2JSON {
         }
     }
 
+    /**
+     * 输入对象JSONObject / JSONArray 返回key对应的String
+     * @param object JSONObject / JSONArray
+     * @param key 目标key
+     * @return 返回value
+     * @see <a href="https://blog.csdn.net/zbo1301/article/details/78014569">json递归查找key对应的值</a>
+     */
+    public static String findValue(Object object, String key) {
+        if (object == null || object == "")
+            return null;
+        Class<?> cls = object.getClass();
+        if (cls == JSONObject.class) {
+            JSONObject json = (JSONObject) object;
+            if (json.containsKey(key)) {
+                return json.getString(key);
+            }
+            for (Object o : json.values()) {
+                String tmp = findValue(o, key);
+                if (tmp != null) {
+                    return tmp;
+                }
+            }
+        } else if (cls == JSONArray.class) {
+            JSONArray array = (JSONArray) object;
+            for (Object o : array) {
+                if (o != null && o != "") {
+                    String tmp = findValue(o, key);
+                    if (tmp != null) {
+                        return tmp;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
 
 
@@ -116,7 +151,7 @@ public class XML2JSON {
                 "\n" +
                 "    <limitQueryJsonResponse xmlns=\"http://wsServer.webservice.eai.infoservice.com\">\n" +
                 "\n" +
-                "        <limitQueryJsonReturn>{&quot;STATUS&quot;:&quot;0&quot;,&quot;EXCEPTION&quot;:&quot;&#x63A5;&#x53E3;&#x6821;&#x9A8C;&#x5F02;&#x5E38;&quot;,&quot;jsonData&quot;:{&quot;bookResult&quot;:[]}}</limitQueryJsonReturn>\n" +
+                "        <limitQueryJsonReturn1>{&quot;1STATUS&quot;:&quot;0&quot;,&quot;EXCEPTION&quot;:&quot;&#x63A5;&#x53E3;&#x6821;&#x9A8C;&#x5F02;&#x5E38;&quot;,&quot;jsonData&quot;:{&quot;bookResult&quot;:[]}}</limitQueryJsonReturn1>\n" +
                 "\n" +
                 "    </limitQueryJsonResponse>\n" +
                 "\n" +
@@ -129,7 +164,8 @@ public class XML2JSON {
         JSONObject result = new JSONObject();
         findValue(jsonObject, "limitQueryJsonReturn", result);
         System.out.println(result);
-
+        String valueByKeyFromJson = findValue(jsonObject, "limitQueryJsonReturn");
+        System.out.println(valueByKeyFromJson);
     }
 
 }
