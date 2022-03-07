@@ -29,6 +29,10 @@
         <xxl-job.version>2.3.0</xxl-job.version>
         <fastjson.version>1.2.76</fastjson.version>
         <beichen.version>1.0.0</beichen.version>
+
+        <!--cloud-->
+        <!--update for cve-2022-22947-->
+        <gateway.version>3.0.7</gateway.version>
         <!--Plugin-->
         <maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
@@ -115,6 +119,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <!--spring cloud-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>${gateway.version}</version>
             </dependency>
             <!--beichen-cloud-dependence-->
             <dependency>
