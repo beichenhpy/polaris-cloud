@@ -12,6 +12,12 @@
     <artifactId>gateway</artifactId>
     <version>1.0.0</version>
     <name>gateway</name>
+
+    <properties>
+        <!--cloud-->
+        <!--update for cve-2022-22947-->
+        <gateway.version>3.0.7</gateway.version>
+    </properties>
     <dependencies>
         <!--2020.0后需要添加这个依赖使bootstrap.yml生效-->
         <dependency>
@@ -21,6 +27,16 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
+            <version>${gateway.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-gateway-server</artifactId>
+            <version>${gateway.version}</version>
         </dependency>
         <!--2020.0.后，需要添加loadbalancer-->
         <dependency>
