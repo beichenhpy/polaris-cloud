@@ -22,7 +22,8 @@ public class FeignExceptionHandler {
 
     @ExceptionHandler(FeignResponseFailException.class)
     public ResponseEntity<ErrorMessage> FeignResponseFailExceptionHandler(HttpServletRequest request, FeignResponseFailException e) {
-        log.error(e.getMessage());
-        return R.F(HttpStatus.SERVICE_UNAVAILABLE, request.getServletPath(), e.getMessage());
+        String servletPath = request.getServletPath();
+        log.error("path: {}, 异常 ：{},{}", servletPath, e.getMessage(), e);
+        return R.F(HttpStatus.SERVICE_UNAVAILABLE, servletPath, e.getMessage());
     }
 }

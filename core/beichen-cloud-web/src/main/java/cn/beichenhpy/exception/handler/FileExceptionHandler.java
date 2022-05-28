@@ -32,8 +32,9 @@ public class FileExceptionHandler {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     @ResponseBody
     public ResponseEntity<ErrorMessage> maxUploadSizeExceededExceptionHandler(HttpServletRequest request, MaxUploadSizeExceededException e) {
-        log.error(e.getMessage());
-        return R.F(HttpStatus.PAYLOAD_TOO_LARGE, request.getServletPath(), "上传文件过大");
+        String servletPath = request.getServletPath();
+        log.error("path: {}, 异常 ：{},{}", servletPath, e.getMessage(), e);
+        return R.F(HttpStatus.PAYLOAD_TOO_LARGE, servletPath, "上传文件过大");
     }
 
     @ExceptionHandler(FileNotUploadException.class)
@@ -45,15 +46,17 @@ public class FileExceptionHandler {
     @ExceptionHandler(FileUploadFailException.class)
     @ResponseBody
     public ResponseEntity<ErrorMessage> fileUploadFailExceptionHandler(HttpServletRequest request, FileUploadFailException e) {
-        log.error(e.getMessage());
-        return R.F_C(request.getServletPath(), "文件上传失败");
+        String servletPath = request.getServletPath();
+        log.error("path: {}, 异常 ：{},{}", servletPath, e.getMessage(), e);
+        return R.F_C(servletPath, "文件上传失败");
     }
 
     @ExceptionHandler(SizeException.class)
     @ResponseBody
     public ResponseEntity<ErrorMessage> fileServiceFailResponseExceptionHandler(HttpServletRequest request, SizeException e) {
-        log.error(e.getMessage());
-        return R.F_C(request.getServletPath(), "上传文件过大");
+        String servletPath = request.getServletPath();
+        log.error("path: {}, 异常 ：{},{}", servletPath, e.getMessage(), e);
+        return R.F_C(servletPath, "上传文件过大");
     }
 
 }

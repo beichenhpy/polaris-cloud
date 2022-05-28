@@ -22,7 +22,8 @@ public class UserExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorMessage> userNotFoundExceptionHandler(HttpServletRequest request, UserNotFoundException e) {
-        log.error(e.getMessage());
-        return R.F_C(request.getServletPath(), e.getMessage());
+        String servletPath = request.getServletPath();
+        log.error("path: {}, 异常 ：{},{}", servletPath, e.getMessage(), e);
+        return R.F_C(servletPath, e.getMessage());
     }
 }
