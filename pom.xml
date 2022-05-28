@@ -12,7 +12,7 @@
     </modules>
 
     <groupId>cn.beichenhpy</groupId>
-    <artifactId>beichen-cloud</artifactId>
+    <artifactId>polaris-cloud</artifactId>
     <version>1.0.0</version>
 
     <!--    properties-->
@@ -31,7 +31,7 @@
         <java.version>11</java.version>
 
         <!--project-version-->
-        <beichen.version>1.0.0</beichen.version>
+        <polaris.version>1.0.0</polaris.version>
         <hutool.version>5.5.8</hutool.version>
         <lombok.version>1.18.12</lombok.version>
         <spring-boot.version>2.4.9</spring-boot.version>
@@ -42,8 +42,8 @@
         <dependencies>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>beichen-cloud-dependencies</artifactId>
-                <version>${beichen.version}</version>
+                <artifactId>polaris-cloud-dependencies</artifactId>
+                <version>${polaris.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

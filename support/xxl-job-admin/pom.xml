@@ -16,7 +16,7 @@
 		<!-- starter-web：spring-webmvc + autoconfigure + logback + yaml + tomcat -->
 		<dependency>
 			<groupId>cn.beichenhpy</groupId>
-			<artifactId>beichen-cloud-web</artifactId>
+			<artifactId>polaris-cloud-web</artifactId>
 		</dependency>
 		<!-- starter-test：junit + spring-test + mockito -->
 		<dependency>

@@ -5,7 +5,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <artifactId>beichen-cloud</artifactId>
+        <artifactId>polaris-cloud</artifactId>
         <groupId>cn.beichenhpy</groupId>
         <version>1.0.0</version>
     </parent>

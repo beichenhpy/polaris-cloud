@@ -9,15 +9,15 @@
     <version>1.0.0</version>
 
     <modules>
-        <module>beichen-cloud-mybatis-plus</module>
-        <module>beichen-cloud-redis</module>
-        <module>beichen-cloud-mongodb</module>
-        <module>beichen-cloud-aop</module>
-        <module>beichen-cloud-web</module>
-        <module>beichen-cloud-validator</module>
-        <module>beichen-cloud-dependencies</module>
-        <module>beichen-cloud-tools</module>
-        <module>beichen-cloud-job</module>
+        <module>polaris-cloud-mybatis-plus</module>
+        <module>polaris-cloud-redis</module>
+        <module>polaris-cloud-mongodb</module>
+        <module>polaris-cloud-aop</module>
+        <module>polaris-cloud-web</module>
+        <module>polaris-cloud-validator</module>
+        <module>polaris-cloud-dependencies</module>
+        <module>polaris-cloud-tools</module>
+        <module>polaris-cloud-job</module>
     </modules>
 
     <properties>
@@ -39,7 +39,7 @@
         <java.version>11</java.version>
 
         <!--project-version-->
-        <beichen.version>1.0.0</beichen.version>
+        <polaris.version>1.0.0</polaris.version>
 
         <spring-boot.version>2.4.5</spring-boot.version>
     </properties>
@@ -49,8 +49,8 @@
         <dependencies>
             <dependency>
                 <groupId>cn.beichenhpy</groupId>
-                <artifactId>beichen-cloud-dependencies</artifactId>
-                <version>${beichen.version}</version>
+                <artifactId>polaris-cloud-dependencies</artifactId>
+                <version>${polaris.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

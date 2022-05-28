@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>beichen-cloud-web</artifactId>
+    <artifactId>polaris-cloud-web</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>cn.beichenhpy</groupId>
-            <artifactId>beichen-cloud-tools</artifactId>
+            <artifactId>polaris-cloud-tools</artifactId>
         </dependency>
     </dependencies>
 </project>

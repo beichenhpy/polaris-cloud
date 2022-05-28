@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.beichenhpy</groupId>
-            <artifactId>beichen-cloud-mybatis-plus</artifactId>
+            <artifactId>polaris-cloud-mybatis-plus</artifactId>
         </dependency>
     </dependencies>
 </project>

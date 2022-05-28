@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 @Slf4j
 public class ExceptionAspect {
 
-    @Before("execution(* cn.beichenhpy.service..*.*(..))")
+    @Before("execution(* cn.beichenhpy.*..*.*(..))")
     public void before(JoinPoint joinpoint) {
         MethodSignature signature = (MethodSignature) joinpoint.getSignature();
         final Method method = signature.getMethod();
@@ -30,7 +30,7 @@ public class ExceptionAspect {
         log.info("intercept method: "+method.getName());
     }
 
-    @AfterThrowing(throwing = "e",pointcut = "execution(* cn.beichenhpy.service..*.*(..))")
+    @AfterThrowing(throwing = "e",pointcut = "execution(* cn.beichenhpy.*..*.*(..))")
     public void afterThrow(Throwable e){
         log.info("method call cn.beichenhpy.exception: "+e.getMessage());
         //这里可以回滚事务

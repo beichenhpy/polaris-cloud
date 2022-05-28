@@ -8,17 +8,28 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <description>redis</description>
+    <artifactId>polaris-cloud-redis</artifactId>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
-    <artifactId>beichen-cloud-tools</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.dom4j</groupId>
-            <artifactId>dom4j</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.beichenhpy</groupId>
+            <artifactId>polaris-cloud-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+
 </project>
