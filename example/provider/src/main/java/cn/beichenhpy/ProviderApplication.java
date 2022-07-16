@@ -1,6 +1,6 @@
 package cn.beichenhpy;
 
-import cn.beichenhpy.annotation.EnableBeichenWeb;
+import cn.beichenhpy.annotation.EnablePolarisWeb;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @since 2021/7/23 22:18
  */
 @EnableFeignClients
-@EnableBeichenWeb
+@EnablePolarisWeb
 @SpringBootApplication
 public class ProviderApplication {
     public static void main(String[] args) {

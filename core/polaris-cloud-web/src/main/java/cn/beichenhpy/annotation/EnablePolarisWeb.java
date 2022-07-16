@@ -18,5 +18,5 @@ import java.lang.annotation.*;
 @Inherited
 @EnableDiscoveryClient
 @Import(AutoWebConfiguration.class)
-public @interface EnableBeichenWeb {
+public @interface EnablePolarisWeb {
 }

@@ -1,6 +1,6 @@
 package cn.beichenhpy;
 
-import cn.beichenhpy.annotation.EnableBeichenWeb;
+import cn.beichenhpy.annotation.EnablePolarisWeb;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @apiNote
  * @since 2021/7/31 14:35
  */
-@EnableBeichenWeb
+@EnablePolarisWeb
 @SpringBootApplication
 public class WebSocketServerApplication {
     public static void main(String[] args) {
